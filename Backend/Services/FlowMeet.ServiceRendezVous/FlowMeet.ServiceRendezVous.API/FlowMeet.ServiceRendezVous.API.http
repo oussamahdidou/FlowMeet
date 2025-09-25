@@ -1,0 +1,6 @@
+@FlowMeet.ServiceRendezVous.API_HostAddress = http://localhost:5206
+
+GET {{FlowMeet.ServiceRendezVous.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,6 @@
+@FlowMeet.Notification.API_HostAddress = http://localhost:5239
+
+GET {{FlowMeet.Notification.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

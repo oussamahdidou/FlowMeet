@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlowMeet.ServiceRendezVous.Application\FlowMeet.ServiceRendezVous.Application.csproj" />
+    <ProjectReference Include="..\FlowMeet.ServiceRendezVous.Domain\FlowMeet.ServiceRendezVous.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
