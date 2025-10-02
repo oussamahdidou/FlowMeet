@@ -55,6 +55,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowMeet.ServiceRendezVous.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowMeet.ServiceRendezVous.Infrastructure", "Backend\Services\FlowMeet.ServiceRendezVous\FlowMeet.ServiceRendezVous.Infrastructure\FlowMeet.ServiceRendezVous.Infrastructure.csproj", "{5A2A95A0-D795-4067-80E7-B4D6E6CB9BAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowMeet.AuthService", "Backend\Services\FlowMeet.AuthService\FlowMeet.AuthService.csproj", "{303369DA-C18F-4C1B-9383-E72EC9B4B90E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FlowMeet.AuthService", "FlowMeet.AuthService", "{D9F77ED8-761E-4E0C-9928-0AC944D7979D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +141,10 @@ Global
 		{5A2A95A0-D795-4067-80E7-B4D6E6CB9BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A2A95A0-D795-4067-80E7-B4D6E6CB9BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A2A95A0-D795-4067-80E7-B4D6E6CB9BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{303369DA-C18F-4C1B-9383-E72EC9B4B90E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{303369DA-C18F-4C1B-9383-E72EC9B4B90E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{303369DA-C18F-4C1B-9383-E72EC9B4B90E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{303369DA-C18F-4C1B-9383-E72EC9B4B90E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,6 +174,8 @@ Global
 		{3FF7ECEB-A4BB-4105-BA36-498057AE3F88} = {01555AE8-2624-44EA-BAA3-748F5EE24145}
 		{E56686C4-774F-428F-8231-9050A931A435} = {01555AE8-2624-44EA-BAA3-748F5EE24145}
 		{5A2A95A0-D795-4067-80E7-B4D6E6CB9BAE} = {01555AE8-2624-44EA-BAA3-748F5EE24145}
+		{303369DA-C18F-4C1B-9383-E72EC9B4B90E} = {D9F77ED8-761E-4E0C-9928-0AC944D7979D}
+		{D9F77ED8-761E-4E0C-9928-0AC944D7979D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B9B741D-08D2-4596-82DB-E7B6635591CF}

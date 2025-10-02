@@ -11,7 +11,7 @@ var annuaireDb = postgres.AddDatabase("annuairedb", "annuaire_user");
 var planningEngineDb = postgres.AddDatabase("planningenginedb", "planningengine_user");
 var serviceRendezVousDb = postgres.AddDatabase("servicerendezvousdb", "servicerendezvous_user");
 var serviceNotificationDb = postgres.AddDatabase("servicenotificationdb", "servicenotification_user");
-
+var authServiceDb = postgres.AddDatabase("authservicedb", "authservice_user");
 // Configure each service with its dedicated database
 var annuaireApi = builder.AddProject<Projects.FlowMeet_Annuaire_API>("flowmeet-annuaire-api")
     .WithReference(annuaireDb, "Database")
@@ -34,14 +34,22 @@ var serviceRendezVousApi = builder.AddProject<Projects.FlowMeet_ServiceRendezVou
     .WithReference(kafka, "MessageBroker")
     .WaitFor(serviceRendezVousDb)
     .WaitFor(kafka);
+var authService = builder.AddProject<Projects.FlowMeet_AuthService>("flowmeet-authservice")
+    .WithReference(authServiceDb, "Database")
+    .WithReference(kafka, "MessageBroker")
+    .WaitFor(authServiceDb)
+    .WaitFor(kafka);
+
 ///gateway
 var gateway = builder.AddProject<Projects.Gateway>("gateway")
     .WithReference(annuaireApi)        // Will use service name as connection key
     .WithReference(planningEngineApi)
     .WithReference(serviceRendezVousApi)
     .WithReference(serviceNotificationApi)
+    .WithReference(authService)
     .WaitFor(annuaireApi)
     .WaitFor(planningEngineApi)
     .WaitFor(serviceRendezVousApi)
-    .WaitFor(serviceNotificationApi);
+    .WaitFor(serviceNotificationApi)
+    .WaitFor(authService);
 builder.Build().Run();

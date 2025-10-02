@@ -1,4 +1,4 @@
-namespace FlowMeet.Annuaire.API
+namespace FlowMeet.AuthService
 {
     public class WeatherForecast
     {

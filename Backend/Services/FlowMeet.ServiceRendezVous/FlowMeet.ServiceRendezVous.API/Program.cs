@@ -1,5 +1,5 @@
-using FlowMeet.ServiceRendezVous.Infrastructure.Data.DbContexts;
-using Microsoft.EntityFrameworkCore;
+using FlowMeet.ServiceRendezVous.Application;
+using FlowMeet.ServiceRendezVous.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
@@ -43,12 +43,6 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-builder.Services.AddDbContext<FlowMeetServiceRendezVousDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-
-});
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
@@ -57,8 +51,8 @@ builder.Services.AddCors(options =>
                     .AllowAnyMethod()
                     );
 });
-
-
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

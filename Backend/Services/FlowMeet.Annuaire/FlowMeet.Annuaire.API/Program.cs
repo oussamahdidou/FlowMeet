@@ -1,5 +1,5 @@
-using FlowMeet.Annuaire.Infrastructure.Data.DbContexts;
-using Microsoft.EntityFrameworkCore;
+using FlowMeet.Annuaire.Application;
+using FlowMeet.Annuaire.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 var builder = WebApplication.CreateBuilder(args);
@@ -41,11 +41,7 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-builder.Services.AddDbContext<FlowMeetAnnuaireDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 
-});
 
 builder.Services.AddCors(options =>
 {
@@ -55,8 +51,8 @@ builder.Services.AddCors(options =>
                     .AllowAnyMethod()
                     );
 });
-
-
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

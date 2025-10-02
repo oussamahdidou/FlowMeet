@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Services\FlowMeet.Annuaire\FlowMeet.Annuaire.API\FlowMeet.Annuaire.API.csproj" />
+    <ProjectReference Include="..\..\Services\FlowMeet.AuthService\FlowMeet.AuthService.csproj" />
     <ProjectReference Include="..\..\Services\FlowMeet.Notification\FlowMeet.Notification.API\FlowMeet.Notification.API.csproj" />
     <ProjectReference Include="..\..\Services\FlowMeet.PlanningEngine\FlowMeet.PlanningEngine.API\FlowMeet.PlanningEngine.API.csproj" />
     <ProjectReference Include="..\..\Services\FlowMeet.ServiceRendezVous\FlowMeet.ServiceRendezVous.API\FlowMeet.ServiceRendezVous.API.csproj" />

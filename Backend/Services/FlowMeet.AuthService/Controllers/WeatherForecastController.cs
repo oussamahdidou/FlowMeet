@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace FlowMeet.Annuaire.API.Controllers
+namespace FlowMeet.AuthService.Controllers
 {
     [ApiController]
     [Route("[controller]")]

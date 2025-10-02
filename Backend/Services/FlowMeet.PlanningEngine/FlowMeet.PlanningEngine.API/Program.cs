@@ -1,5 +1,5 @@
-using FlowMeet.PlanningEngine.Infrastructure.Data.DbContexts;
-using Microsoft.EntityFrameworkCore;
+using FlowMeet.PlanningEngine.Application;
+using FlowMeet.PlanningEngine.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 var builder = WebApplication.CreateBuilder(args);
@@ -41,11 +41,7 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-builder.Services.AddDbContext<FlowMeetPlanningEngineDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 
-});
 
 builder.Services.AddCors(options =>
 {
@@ -55,7 +51,8 @@ builder.Services.AddCors(options =>
                     .AllowAnyMethod()
                     );
 });
-
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
