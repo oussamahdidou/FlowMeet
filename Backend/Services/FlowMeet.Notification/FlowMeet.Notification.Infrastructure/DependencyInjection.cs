@@ -19,7 +19,7 @@ namespace FlowMeet.Notification.Infrastructure
 );
             services.AddDbContext<FlowMeetNotificationDbContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(configuration.GetConnectionString("Database"));
 
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();

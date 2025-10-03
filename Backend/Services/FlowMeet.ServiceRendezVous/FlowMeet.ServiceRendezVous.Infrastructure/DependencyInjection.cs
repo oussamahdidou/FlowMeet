@@ -19,7 +19,7 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure
 );
             services.AddDbContext<FlowMeetServiceRendezVousDbContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(configuration.GetConnectionString("Database"));
 
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
