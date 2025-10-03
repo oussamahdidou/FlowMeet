@@ -10,7 +10,7 @@ namespace FlowMeet.Notification.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Scan(scan => scan.FromAssemblyOf<FlowMeetNotificationDbContext>() // or any known type in your assembly
+            services.Scan(scan => scan.FromAssemblyOf<FlowMeetNotificationDbContext>()
                     .AddClasses(classes => classes.Where(type =>
                                 type.Name.EndsWith("Repository") ||
                                 type.Name.EndsWith("Service")))

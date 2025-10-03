@@ -1,5 +1,6 @@
 using FlowMeet.Notification.Application;
 using FlowMeet.Notification.Infrastructure;
+using FlowMeet.Notification.Infrastructure.Extensions;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 var builder = WebApplication.CreateBuilder(args);
@@ -68,6 +69,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-
+await app.Migrate();
 app.Run();
 
