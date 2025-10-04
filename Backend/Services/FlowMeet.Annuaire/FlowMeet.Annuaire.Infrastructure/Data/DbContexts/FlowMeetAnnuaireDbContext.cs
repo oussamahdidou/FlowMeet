@@ -1,4 +1,5 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
+using FlowMeet.Annuaire.Domain.Entities;
 using FlowMeet.Annuaire.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,24 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.DbContexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.UseEncryptedProperties(encryptionService);
+            modelBuilder.Entity<CollaborateurRole>(x => x.HasKey(p => new { p.RoleId, p.CollaborateurId }));
+            modelBuilder.Entity<CollaborateurRole>()
+            .HasOne(u => u.Role)
+            .WithMany(u => u.CollaborateurRoles)
+            .HasForeignKey(p => p.RoleId);
+            modelBuilder.Entity<CollaborateurRole>()
+            .HasOne(u => u.Collaborateur)
+            .WithMany(u => u.CollaborateurRoles)
+            .HasForeignKey(p => p.CollaborateurId);
+            modelBuilder.Entity<CollaborateurGroupe>(x => x.HasKey(p => new { p.GroupeId, p.CollaborateurId }));
+            modelBuilder.Entity<CollaborateurGroupe>()
+            .HasOne(u => u.Groupe)
+            .WithMany(u => u.CollaborateurGroupes)
+            .HasForeignKey(p => p.GroupeId);
+            modelBuilder.Entity<CollaborateurGroupe>()
+            .HasOne(u => u.Collaborateur)
+            .WithMany(u => u.CollaborateurGroupes)
+            .HasForeignKey(p => p.CollaborateurId);
         }
     }
 }
