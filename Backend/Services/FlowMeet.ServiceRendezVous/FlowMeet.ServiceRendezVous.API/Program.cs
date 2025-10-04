@@ -1,5 +1,6 @@
 using FlowMeet.ServiceRendezVous.Application;
 using FlowMeet.ServiceRendezVous.Infrastructure;
+using FlowMeet.ServiceRendezVous.Infrastructure.Extensions;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
@@ -67,7 +68,7 @@ app.UseCors("AllowOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
+await app.Migrate();
 
 app.Run();
 
