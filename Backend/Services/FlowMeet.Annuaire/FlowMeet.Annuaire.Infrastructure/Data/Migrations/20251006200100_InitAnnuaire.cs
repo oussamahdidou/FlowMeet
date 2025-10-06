@@ -50,6 +50,30 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RoleGroupe",
+                columns: table => new
+                {
+                    RoleId = table.Column<string>(type: "text", nullable: false),
+                    GroupeId = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleGroupe", x => new { x.RoleId, x.GroupeId });
+                    table.ForeignKey(
+                        name: "FK_RoleGroupe_Groupe_GroupeId",
+                        column: x => x.GroupeId,
+                        principalTable: "Groupe",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleGroupe_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Entite",
                 columns: table => new
                 {
@@ -173,6 +197,11 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 name: "IX_Entite_TypeEntiteId",
                 table: "Entite",
                 column: "TypeEntiteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleGroupe_GroupeId",
+                table: "RoleGroupe",
+                column: "GroupeId");
         }
 
         /// <inheritdoc />
@@ -185,10 +214,13 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 name: "CollaborateurRole");
 
             migrationBuilder.DropTable(
-                name: "Groupe");
+                name: "RoleGroupe");
 
             migrationBuilder.DropTable(
                 name: "Collaborateur");
+
+            migrationBuilder.DropTable(
+                name: "Groupe");
 
             migrationBuilder.DropTable(
                 name: "Role");

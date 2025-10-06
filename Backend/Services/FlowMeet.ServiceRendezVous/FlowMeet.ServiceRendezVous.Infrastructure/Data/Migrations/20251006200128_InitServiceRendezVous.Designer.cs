@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlowMeet.ServiceRendezVous.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(FlowMeetServiceRendezVousDbContext))]
-    [Migration("20251004150559_InitServiceRendezVous")]
+    [Migration("20251006200128_InitServiceRendezVous")]
     partial class InitServiceRendezVous
     {
         /// <inheritdoc />

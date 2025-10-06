@@ -8,6 +8,6 @@ namespace FlowMeet.Notification.Domain.Entities
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public ICollection<UserNotification> UserNotifications { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }

@@ -44,42 +44,36 @@ namespace FlowMeet.Notification.Infrastructure.Data.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsRead = table.Column<bool>(type: "boolean", nullable: false),
-                    NotificationTemplateId = table.Column<string>(type: "text", nullable: false)
+                    Content = table.Column<string>(type: "text", nullable: false),
+                    NotificationTemplateId = table.Column<string>(type: "text", nullable: false),
+                    MessageId = table.Column<string>(type: "text", nullable: true),
+                    TargetUserId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_Messages_MessageId",
+                        column: x => x.MessageId,
+                        principalTable: "Messages",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Messages_NotificationTemplates_NotificationTemplateId",
                         column: x => x.NotificationTemplateId,
                         principalTable: "NotificationTemplates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserNotifications",
-                columns: table => new
-                {
-                    TargetUserId = table.Column<string>(type: "text", nullable: false),
-                    MessageId = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserNotifications", x => new { x.TargetUserId, x.MessageId });
                     table.ForeignKey(
-                        name: "FK_UserNotifications_Messages_MessageId",
-                        column: x => x.MessageId,
-                        principalTable: "Messages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserNotifications_TargetUsers_TargetUserId",
+                        name: "FK_Messages_TargetUsers_TargetUserId",
                         column: x => x.TargetUserId,
                         principalTable: "TargetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_MessageId",
+                table: "Messages",
+                column: "MessageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_NotificationTemplateId",
@@ -87,25 +81,22 @@ namespace FlowMeet.Notification.Infrastructure.Data.Migrations
                 column: "NotificationTemplateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserNotifications_MessageId",
-                table: "UserNotifications",
-                column: "MessageId");
+                name: "IX_Messages_TargetUserId",
+                table: "Messages",
+                column: "TargetUserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserNotifications");
-
-            migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "TargetUsers");
+                name: "NotificationTemplates");
 
             migrationBuilder.DropTable(
-                name: "NotificationTemplates");
+                name: "TargetUsers");
         }
     }
 }

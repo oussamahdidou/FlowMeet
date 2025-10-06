@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlowMeet.Notification.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(FlowMeetNotificationDbContext))]
-    [Migration("20251003231915_InitNotification")]
+    [Migration("20251006200155_InitNotification")]
     partial class InitNotification
     {
         /// <inheritdoc />
@@ -30,19 +30,33 @@ namespace FlowMeet.Notification.Infrastructure.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("MessageId")
+                        .HasColumnType("text");
+
                     b.Property<string>("NotificationTemplateId")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("TargetUserId")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("MessageId");
+
                     b.HasIndex("NotificationTemplateId");
+
+                    b.HasIndex("TargetUserId");
 
                     b.ToTable("Messages");
                 });
@@ -83,54 +97,28 @@ namespace FlowMeet.Notification.Infrastructure.Data.Migrations
                     b.ToTable("TargetUsers");
                 });
 
-            modelBuilder.Entity("FlowMeet.Notification.Domain.Entities.UserNotification", b =>
-                {
-                    b.Property<string>("TargetUserId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MessageId")
-                        .HasColumnType("text");
-
-                    b.HasKey("TargetUserId", "MessageId");
-
-                    b.HasIndex("MessageId");
-
-                    b.ToTable("UserNotifications");
-                });
-
             modelBuilder.Entity("FlowMeet.Notification.Domain.Entities.Message", b =>
                 {
+                    b.HasOne("FlowMeet.Notification.Domain.Entities.Message", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("MessageId");
+
                     b.HasOne("FlowMeet.Notification.Domain.Entities.NotificationTemplate", "NotificationTemplate")
                         .WithMany("Notifications")
                         .HasForeignKey("NotificationTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FlowMeet.Notification.Domain.Entities.TargetUser", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("TargetUserId");
+
                     b.Navigation("NotificationTemplate");
-                });
-
-            modelBuilder.Entity("FlowMeet.Notification.Domain.Entities.UserNotification", b =>
-                {
-                    b.HasOne("FlowMeet.Notification.Domain.Entities.Message", "Message")
-                        .WithMany("UserNotifications")
-                        .HasForeignKey("MessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FlowMeet.Notification.Domain.Entities.TargetUser", "TargetUser")
-                        .WithMany("UserNotifications")
-                        .HasForeignKey("TargetUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Message");
-
-                    b.Navigation("TargetUser");
                 });
 
             modelBuilder.Entity("FlowMeet.Notification.Domain.Entities.Message", b =>
                 {
-                    b.Navigation("UserNotifications");
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("FlowMeet.Notification.Domain.Entities.NotificationTemplate", b =>
@@ -140,7 +128,7 @@ namespace FlowMeet.Notification.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("FlowMeet.Notification.Domain.Entities.TargetUser", b =>
                 {
-                    b.Navigation("UserNotifications");
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

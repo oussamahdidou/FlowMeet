@@ -36,6 +36,15 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.DbContexts
             .HasOne(u => u.Collaborateur)
             .WithMany(u => u.CollaborateurGroupes)
             .HasForeignKey(p => p.CollaborateurId);
+            modelBuilder.Entity<RoleGroupe>(x => x.HasKey(p => new { p.RoleId, p.GroupeId }));
+            modelBuilder.Entity<RoleGroupe>()
+                .HasOne(u => u.Role)
+                .WithMany(u => u.RoleGroupes)
+                .HasForeignKey(p => p.RoleId);
+            modelBuilder.Entity<RoleGroupe>()
+                .HasOne(u => u.Groupe)
+                .WithMany(u => u.RoleGroupes)
+                .HasForeignKey(p => p.GroupeId);
         }
     }
 }

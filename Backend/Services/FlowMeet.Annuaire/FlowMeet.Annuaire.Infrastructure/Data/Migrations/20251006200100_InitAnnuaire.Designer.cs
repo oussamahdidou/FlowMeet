@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(FlowMeetAnnuaireDbContext))]
-    [Migration("20251004204516_InitAnnuaire")]
+    [Migration("20251006200100_InitAnnuaire")]
     partial class InitAnnuaire
     {
         /// <inheritdoc />
@@ -171,6 +171,21 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                     b.ToTable("Role");
                 });
 
+            modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.RoleGroupe", b =>
+                {
+                    b.Property<string>("RoleId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GroupeId")
+                        .HasColumnType("text");
+
+                    b.HasKey("RoleId", "GroupeId");
+
+                    b.HasIndex("GroupeId");
+
+                    b.ToTable("RoleGroupe");
+                });
+
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.TypeEntite", b =>
                 {
                     b.Property<string>("Id")
@@ -254,6 +269,25 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                     b.Navigation("TypeEntite");
                 });
 
+            modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.RoleGroupe", b =>
+                {
+                    b.HasOne("FlowMeet.Annuaire.Domain.Entities.Groupe", "Groupe")
+                        .WithMany("RoleGroupes")
+                        .HasForeignKey("GroupeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FlowMeet.Annuaire.Domain.Entities.Role", "Role")
+                        .WithMany("RoleGroupes")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Groupe");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.Collaborateur", b =>
                 {
                     b.Navigation("CollaborateurGroupes");
@@ -269,11 +303,15 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.Groupe", b =>
                 {
                     b.Navigation("CollaborateurGroupes");
+
+                    b.Navigation("RoleGroupes");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.Role", b =>
                 {
                     b.Navigation("CollaborateurRoles");
+
+                    b.Navigation("RoleGroupes");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.TypeEntite", b =>

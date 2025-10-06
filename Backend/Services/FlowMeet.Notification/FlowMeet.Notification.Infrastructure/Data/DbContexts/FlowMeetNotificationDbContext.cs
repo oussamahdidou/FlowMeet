@@ -16,20 +16,11 @@ namespace FlowMeet.Notification.Infrastructure.Data.DbContexts
         public DbSet<NotificationTemplate> NotificationTemplates { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<TargetUser> TargetUsers { get; set; }
-        public DbSet<UserNotification> UserNotifications { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.UseEncryptedProperties(encryptionService);
-            modelBuilder.Entity<UserNotification>(x => x.HasKey(p => new { p.TargetUserId, p.MessageId }));
-            modelBuilder.Entity<UserNotification>()
-            .HasOne(u => u.TargetUser)
-            .WithMany(u => u.UserNotifications)
-            .HasForeignKey(p => p.TargetUserId);
-            modelBuilder.Entity<UserNotification>()
-            .HasOne(u => u.Message)
-            .WithMany(u => u.UserNotifications)
-            .HasForeignKey(p => p.MessageId);
+
         }
     }
 }

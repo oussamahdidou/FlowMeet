@@ -1,5 +1,6 @@
 using FlowMeet.Annuaire.Application;
 using FlowMeet.Annuaire.Infrastructure;
+using FlowMeet.Annuaire.Infrastructure.Extensions;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 var builder = WebApplication.CreateBuilder(args);
@@ -67,7 +68,7 @@ app.UseCors("AllowOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
+await app.Migrate();
 
 app.Run();
 

@@ -9,6 +9,6 @@ namespace FlowMeet.Annuaire.Domain.Entities
         public string Label { get; set; }
         public bool Heritee { get; set; }
         public ICollection<CollaborateurRole> CollaborateurRoles { get; set; } = new List<CollaborateurRole>();
-
+        public ICollection<RoleGroupe> RoleGroupes { get; set; } = new List<RoleGroupe>();
     }
 }
