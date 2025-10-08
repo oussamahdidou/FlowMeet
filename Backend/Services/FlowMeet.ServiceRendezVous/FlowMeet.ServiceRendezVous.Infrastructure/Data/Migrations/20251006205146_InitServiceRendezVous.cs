@@ -44,7 +44,8 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Label = table.Column<string>(type: "text", nullable: false)
+                    Label = table.Column<string>(type: "text", nullable: false),
+                    EntiteId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,7 +70,8 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Label = table.Column<string>(type: "text", nullable: false)
+                    Label = table.Column<string>(type: "text", nullable: false),
+                    EntiteId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

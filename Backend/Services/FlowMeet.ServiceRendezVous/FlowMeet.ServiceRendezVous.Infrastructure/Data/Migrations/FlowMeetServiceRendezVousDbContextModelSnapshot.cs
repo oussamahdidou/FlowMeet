@@ -77,6 +77,10 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
+                    b.Property<string>("EntiteId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Label")
                         .IsRequired()
                         .HasColumnType("text");
@@ -155,6 +159,10 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure.Data.Migrations
             modelBuilder.Entity("FlowMeet.ServiceRendezVous.Domain.Entities.Role", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EntiteId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Label")

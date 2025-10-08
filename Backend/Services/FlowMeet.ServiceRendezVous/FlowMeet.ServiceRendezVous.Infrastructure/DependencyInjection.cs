@@ -17,6 +17,8 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure
                     .AsImplementedInterfaces()
                     .WithScopedLifetime()
 );
+
+
             services.AddDbContext<FlowMeetServiceRendezVousDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("Database"));

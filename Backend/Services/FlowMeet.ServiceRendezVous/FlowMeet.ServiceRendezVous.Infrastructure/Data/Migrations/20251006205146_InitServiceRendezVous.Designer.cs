@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlowMeet.ServiceRendezVous.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(FlowMeetServiceRendezVousDbContext))]
-    [Migration("20251006200128_InitServiceRendezVous")]
+    [Migration("20251006205146_InitServiceRendezVous")]
     partial class InitServiceRendezVous
     {
         /// <inheritdoc />
@@ -78,6 +78,10 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure.Data.Migrations
             modelBuilder.Entity("FlowMeet.ServiceRendezVous.Domain.Entities.Groupe", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EntiteId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Label")
@@ -158,6 +162,10 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure.Data.Migrations
             modelBuilder.Entity("FlowMeet.ServiceRendezVous.Domain.Entities.Role", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EntiteId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Label")

@@ -19,6 +19,8 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
     <PackageReference Include="Scrutor" Version="6.1.0" />
+    <PackageReference Include="Silverback.Integration" Version="4.6.2" />
+    <PackageReference Include="Silverback.Integration.Kafka" Version="4.6.2" />
   </ItemGroup>
 
   <ItemGroup>

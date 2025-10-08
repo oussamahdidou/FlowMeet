@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowMeet.AuthService", "Bac
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FlowMeet.AuthService", "FlowMeet.AuthService", "{D9F77ED8-761E-4E0C-9928-0AC944D7979D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Backend\Infrastructure\Contracts\Contracts.csproj", "{4C24B9F4-04FD-488F-913A-A2DDD8D513FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,10 @@ Global
 		{303369DA-C18F-4C1B-9383-E72EC9B4B90E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{303369DA-C18F-4C1B-9383-E72EC9B4B90E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{303369DA-C18F-4C1B-9383-E72EC9B4B90E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C24B9F4-04FD-488F-913A-A2DDD8D513FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C24B9F4-04FD-488F-913A-A2DDD8D513FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C24B9F4-04FD-488F-913A-A2DDD8D513FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C24B9F4-04FD-488F-913A-A2DDD8D513FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +182,7 @@ Global
 		{5A2A95A0-D795-4067-80E7-B4D6E6CB9BAE} = {01555AE8-2624-44EA-BAA3-748F5EE24145}
 		{303369DA-C18F-4C1B-9383-E72EC9B4B90E} = {D9F77ED8-761E-4E0C-9928-0AC944D7979D}
 		{D9F77ED8-761E-4E0C-9928-0AC944D7979D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4C24B9F4-04FD-488F-913A-A2DDD8D513FD} = {98B071C2-41FF-4F35-9DC1-C7A6E73AD6F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B9B741D-08D2-4596-82DB-E7B6635591CF}
