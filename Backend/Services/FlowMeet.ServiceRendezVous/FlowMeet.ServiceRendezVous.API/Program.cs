@@ -1,6 +1,7 @@
 using FlowMeet.ServiceRendezVous.Application;
 using FlowMeet.ServiceRendezVous.Infrastructure;
 using FlowMeet.ServiceRendezVous.Infrastructure.Extensions;
+using KafkaFlow;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
@@ -69,6 +70,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 await app.Migrate();
+var kafkaBus = app.Services.CreateKafkaBus();
+await kafkaBus.StartAsync();
 
-app.Run();
+await app.RunAsync();
 
