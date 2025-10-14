@@ -4,8 +4,9 @@ var postgres = builder.AddPostgres("postgresql", port: 5432)
     .WithVolume("flowmeet", "/var/lib/postgresql/data");
 
 var kafka = builder.AddKafka("kafka")
+    .WithEnvironment("KAFKA_AUTO_CREATE_TOPICS_ENABLE", "true")
     .WithKafkaUI()
-    .WithVolume("flowmeet-kafka-data", "/var/kafka-logs");
+    .WithDataVolume();
 // Create dedicated databases for each service
 var annuaireDb = postgres.AddDatabase("annuairedb", "annuaire_user");
 var planningEngineDb = postgres.AddDatabase("planningenginedb", "planningengine_user");

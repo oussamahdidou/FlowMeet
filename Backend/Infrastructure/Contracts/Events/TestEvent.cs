@@ -1,4 +1,4 @@
 ﻿namespace Contracts.Events
 {
-    public record TestEvent(Guid Guid);
+    public record TestEvent(string Message, Guid Id);
 }

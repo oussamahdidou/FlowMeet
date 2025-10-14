@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Confluent.Kafka.Extensions.OpenTelemetry" Version="0.4.0" />
 
     <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.4.0" />
     <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="9.2.1" />

@@ -1,4 +1,5 @@
 using FlowMeet.AuthService.Data;
+using KafkaFlow;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -93,6 +94,14 @@ builder.Services.AddCors(options =>
                     .AllowAnyMethod()
                     );
 });
+builder.Services.AddKafka(kafka => kafka
+          .UseConsoleLog()
+          .AddCluster(cluster => cluster
+              .WithBrokers(new[] { builder.Configuration.GetConnectionString("MessageBroker") })
+          //.AddConsumer<TestEventHandler>("sample-topic", "sample-group")
+          //.AddProducer("producer-name", "sample-topic")
+          )
+      );
 
 var app = builder.Build();
 

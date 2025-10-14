@@ -17,14 +17,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Infrastructure\Contracts\Contracts.csproj" />
 		<ProjectReference Include="..\..\..\Infrastructure\FlowMeet.ServiceDefaults\FlowMeet.ServiceDefaults.csproj" />
 		<ProjectReference Include="..\FlowMeet.ServiceRendezVous.Application\FlowMeet.ServiceRendezVous.Application.csproj" />
 		<ProjectReference Include="..\FlowMeet.ServiceRendezVous.Domain\FlowMeet.ServiceRendezVous.Domain.csproj" />
 		<ProjectReference Include="..\FlowMeet.ServiceRendezVous.Infrastructure\FlowMeet.ServiceRendezVous.Infrastructure.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Controllers\" />
 	</ItemGroup>
 
 </Project>

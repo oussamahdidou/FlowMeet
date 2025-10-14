@@ -1,5 +1,8 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
+using FlowMeet.Annuaire.Infrastructure.Consumers;
 using FlowMeet.Annuaire.Infrastructure.Data.DbContexts;
+using FlowMeet.Annuaire.Infrastructure.Extensions;
+using KafkaFlow;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,10 +16,20 @@ namespace FlowMeet.Annuaire.Infrastructure
             services.Scan(scan => scan.FromAssemblyOf<FlowMeetAnnuaireDbContext>() // or any known type in your assembly
                     .AddClasses(classes => classes.Where(type =>
                                 type.Name.EndsWith("Repository") ||
-                                type.Name.EndsWith("Service")))
+                                type.Name.EndsWith("Service") ||
+                                type.Name.EndsWith("Publisher")))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime()
 );
+            services.AddKafka(kafka => kafka
+               .UseConsoleLog()
+               .AddCluster(cluster => cluster
+                   .WithBrokers(new[] { configuration.GetConnectionString("MessageBroker") })
+                    .AddConsumer<TestEventHandler>("sample-topic", "sample-group")//
+                    .AddProducer("producer-name", "sample-topic")
+               )
+           );
+
             services.AddDbContext<FlowMeetAnnuaireDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("Database"));

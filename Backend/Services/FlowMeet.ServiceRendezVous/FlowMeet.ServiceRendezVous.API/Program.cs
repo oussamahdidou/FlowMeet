@@ -75,3 +75,4 @@ await kafkaBus.StartAsync();
 
 await app.RunAsync();
 
+await kafkaBus.StopAsync();

@@ -2,19 +2,19 @@
 using KafkaFlow;
 using Microsoft.Extensions.Logging;
 
-namespace FlowMeet.ServiceRendezVous.Infrastructure.Consumers
+namespace FlowMeet.Annuaire.Infrastructure.Consumers
 {
     public class TestEventHandler : IMessageHandler<TestEvent>
     {
-        private readonly ILogger<TestEventHandler> _logger;
+        private readonly ILogger<TestEventHandler> logger;
         public TestEventHandler(ILogger<TestEventHandler> logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
         public Task Handle(IMessageContext context, TestEvent message)
         {
-            _logger.LogInformation(
+            logger.LogInformation(
                 "Processing Message: {message}",
                 message.ToString()
             );
