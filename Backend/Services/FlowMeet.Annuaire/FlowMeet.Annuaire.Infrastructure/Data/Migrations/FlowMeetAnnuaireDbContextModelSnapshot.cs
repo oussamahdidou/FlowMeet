@@ -55,7 +55,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 
                     b.HasIndex("EntiteId");
 
-                    b.ToTable("Collaborateur");
+                    b.ToTable("Collaborateurs");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.CollaborateurGroupe", b =>
@@ -70,7 +70,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 
                     b.HasIndex("CollaborateurId");
 
-                    b.ToTable("CollaborateurGroupe");
+                    b.ToTable("CollaborateurGroupes");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.CollaborateurRole", b =>
@@ -85,7 +85,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 
                     b.HasIndex("CollaborateurId");
 
-                    b.ToTable("CollaborateurRole");
+                    b.ToTable("CollaborateurRoles");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.Entite", b =>
@@ -131,7 +131,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 
                     b.HasIndex("TypeEntiteId");
 
-                    b.ToTable("Entite");
+                    b.ToTable("Entites");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.Groupe", b =>
@@ -148,7 +148,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groupe");
+                    b.ToTable("Groupes");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.Role", b =>
@@ -165,7 +165,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.RoleGroupe", b =>
@@ -180,7 +180,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 
                     b.HasIndex("GroupeId");
 
-                    b.ToTable("RoleGroupe");
+                    b.ToTable("RoleGroupes");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.TypeEntite", b =>
@@ -197,7 +197,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TypeEntite");
+                    b.ToTable("TypeEntites");
                 });
 
             modelBuilder.Entity("FlowMeet.Annuaire.Domain.Entities.Collaborateur", b =>

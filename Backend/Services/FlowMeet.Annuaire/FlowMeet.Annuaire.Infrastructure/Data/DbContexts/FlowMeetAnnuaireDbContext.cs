@@ -13,6 +13,14 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.DbContexts
         {
             this.encryptionService = encryptionService;
         }
+        public DbSet<Collaborateur> Collaborateurs { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Groupe> Groupes { get; set; }
+        public DbSet<CollaborateurRole> CollaborateurRoles { get; set; }
+        public DbSet<CollaborateurGroupe> CollaborateurGroupes { get; set; }
+        public DbSet<RoleGroupe> RoleGroupes { get; set; }
+        public DbSet<TypeEntite> TypeEntites { get; set; }
+        public DbSet<Entite> Entites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

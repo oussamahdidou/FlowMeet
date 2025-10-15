@@ -11,7 +11,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Groupe",
+                name: "Groupes",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -20,11 +20,11 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Groupe", x => x.Id);
+                    table.PrimaryKey("PK_Groupes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -33,11 +33,11 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Role", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TypeEntite",
+                name: "TypeEntites",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -46,11 +46,11 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TypeEntite", x => x.Id);
+                    table.PrimaryKey("PK_TypeEntites", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleGroupe",
+                name: "RoleGroupes",
                 columns: table => new
                 {
                     RoleId = table.Column<string>(type: "text", nullable: false),
@@ -58,23 +58,23 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleGroupe", x => new { x.RoleId, x.GroupeId });
+                    table.PrimaryKey("PK_RoleGroupes", x => new { x.RoleId, x.GroupeId });
                     table.ForeignKey(
-                        name: "FK_RoleGroupe_Groupe_GroupeId",
+                        name: "FK_RoleGroupes_Groupes_GroupeId",
                         column: x => x.GroupeId,
-                        principalTable: "Groupe",
+                        principalTable: "Groupes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RoleGroupe_Role_RoleId",
+                        name: "FK_RoleGroupes_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Role",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Entite",
+                name: "Entites",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -88,22 +88,22 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entite", x => x.Id);
+                    table.PrimaryKey("PK_Entites", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Entite_Entite_ParentId",
+                        name: "FK_Entites_Entites_ParentId",
                         column: x => x.ParentId,
-                        principalTable: "Entite",
+                        principalTable: "Entites",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Entite_TypeEntite_TypeEntiteId",
+                        name: "FK_Entites_TypeEntites_TypeEntiteId",
                         column: x => x.TypeEntiteId,
-                        principalTable: "TypeEntite",
+                        principalTable: "TypeEntites",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Collaborateur",
+                name: "Collaborateurs",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -116,17 +116,17 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Collaborateur", x => x.Id);
+                    table.PrimaryKey("PK_Collaborateurs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Collaborateur_Entite_EntiteId",
+                        name: "FK_Collaborateurs_Entites_EntiteId",
                         column: x => x.EntiteId,
-                        principalTable: "Entite",
+                        principalTable: "Entites",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CollaborateurGroupe",
+                name: "CollaborateurGroupes",
                 columns: table => new
                 {
                     CollaborateurId = table.Column<string>(type: "text", nullable: false),
@@ -134,23 +134,23 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CollaborateurGroupe", x => new { x.GroupeId, x.CollaborateurId });
+                    table.PrimaryKey("PK_CollaborateurGroupes", x => new { x.GroupeId, x.CollaborateurId });
                     table.ForeignKey(
-                        name: "FK_CollaborateurGroupe_Collaborateur_CollaborateurId",
+                        name: "FK_CollaborateurGroupes_Collaborateurs_CollaborateurId",
                         column: x => x.CollaborateurId,
-                        principalTable: "Collaborateur",
+                        principalTable: "Collaborateurs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CollaborateurGroupe_Groupe_GroupeId",
+                        name: "FK_CollaborateurGroupes_Groupes_GroupeId",
                         column: x => x.GroupeId,
-                        principalTable: "Groupe",
+                        principalTable: "Groupes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CollaborateurRole",
+                name: "CollaborateurRoles",
                 columns: table => new
                 {
                     CollaborateurId = table.Column<string>(type: "text", nullable: false),
@@ -158,49 +158,49 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CollaborateurRole", x => new { x.RoleId, x.CollaborateurId });
+                    table.PrimaryKey("PK_CollaborateurRoles", x => new { x.RoleId, x.CollaborateurId });
                     table.ForeignKey(
-                        name: "FK_CollaborateurRole_Collaborateur_CollaborateurId",
+                        name: "FK_CollaborateurRoles_Collaborateurs_CollaborateurId",
                         column: x => x.CollaborateurId,
-                        principalTable: "Collaborateur",
+                        principalTable: "Collaborateurs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CollaborateurRole_Role_RoleId",
+                        name: "FK_CollaborateurRoles_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Role",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Collaborateur_EntiteId",
-                table: "Collaborateur",
+                name: "IX_CollaborateurGroupes_CollaborateurId",
+                table: "CollaborateurGroupes",
+                column: "CollaborateurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CollaborateurRoles_CollaborateurId",
+                table: "CollaborateurRoles",
+                column: "CollaborateurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Collaborateurs_EntiteId",
+                table: "Collaborateurs",
                 column: "EntiteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CollaborateurGroupe_CollaborateurId",
-                table: "CollaborateurGroupe",
-                column: "CollaborateurId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CollaborateurRole_CollaborateurId",
-                table: "CollaborateurRole",
-                column: "CollaborateurId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Entite_ParentId",
-                table: "Entite",
+                name: "IX_Entites_ParentId",
+                table: "Entites",
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entite_TypeEntiteId",
-                table: "Entite",
+                name: "IX_Entites_TypeEntiteId",
+                table: "Entites",
                 column: "TypeEntiteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleGroupe_GroupeId",
-                table: "RoleGroupe",
+                name: "IX_RoleGroupes_GroupeId",
+                table: "RoleGroupes",
                 column: "GroupeId");
         }
 
@@ -208,28 +208,28 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CollaborateurGroupe");
+                name: "CollaborateurGroupes");
 
             migrationBuilder.DropTable(
-                name: "CollaborateurRole");
+                name: "CollaborateurRoles");
 
             migrationBuilder.DropTable(
-                name: "RoleGroupe");
+                name: "RoleGroupes");
 
             migrationBuilder.DropTable(
-                name: "Collaborateur");
+                name: "Collaborateurs");
 
             migrationBuilder.DropTable(
-                name: "Groupe");
+                name: "Groupes");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Entite");
+                name: "Entites");
 
             migrationBuilder.DropTable(
-                name: "TypeEntite");
+                name: "TypeEntites");
         }
     }
 }

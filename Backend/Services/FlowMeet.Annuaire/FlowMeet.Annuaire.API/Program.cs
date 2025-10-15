@@ -1,3 +1,4 @@
+using FlowMeet.Annuaire.API.Middleware;
 using FlowMeet.Annuaire.Application;
 using FlowMeet.Annuaire.Infrastructure;
 using FlowMeet.Annuaire.Infrastructure.Extensions;
@@ -55,6 +56,8 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddTransient<ExceptionMiddleware>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -68,6 +71,7 @@ app.UseHttpsRedirection();
 app.UseCors("AllowOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 await app.Migrate();
 var kafkaBus = app.Services.CreateKafkaBus();
