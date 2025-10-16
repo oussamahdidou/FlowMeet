@@ -1,4 +1,5 @@
-﻿using FlowMeet.Annuaire.Domain.Entities;
+﻿using FlowMeet.Annuaire.Domain.Common;
+using FlowMeet.Annuaire.Domain.Entities;
 
 namespace FlowMeet.Annuaire.Domain.Repositories
 {
@@ -8,5 +9,9 @@ namespace FlowMeet.Annuaire.Domain.Repositories
         Task AddAsync(TypeEntite typeEntite);
         Task<TypeEntite?> GetByIdAsync(string id);
         Task DeleteAsync(TypeEntite typeEntite);
+        Task<List<TResult>> GetAsync<TResult>(QueryParameters<TypeEntite, TResult> queryParameters)
+           where TResult : class;
+
+
     }
 }

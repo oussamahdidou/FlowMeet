@@ -7,10 +7,10 @@ using FlowMeet.Annuaire.Domain.Common;
 
 namespace FlowMeet.Annuaire.Application.Features.Handlers.TypeEntite
 {
-    public class TypeEntiteCommandHandler : IRequestHandler<CreateTypeEntiteCommand, Result<TypeEntiteDTO>>
+    public class CreateTypeEntiteCommandHandler : IRequestHandler<CreateTypeEntiteCommand, Result<TypeEntiteDTO>>
     {
         private readonly IUnitOfWork unitOfWork;
-        public TypeEntiteCommandHandler(IUnitOfWork unitOfWork)
+        public CreateTypeEntiteCommandHandler(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }

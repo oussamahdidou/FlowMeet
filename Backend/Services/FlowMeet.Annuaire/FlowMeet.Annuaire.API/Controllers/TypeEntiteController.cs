@@ -1,6 +1,7 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Features.Commands.TypeEntite;
 using FlowMeet.Annuaire.Application.Features.DTOs.Responses.TypeEntite;
+using FlowMeet.Annuaire.Application.Features.Queries;
 using FlowMeet.Annuaire.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,13 +17,23 @@ namespace FlowMeet.Annuaire.API.Controllers
             this.mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("CreateTypeRendezVous")]
         public async Task<IActionResult> CreateTypeEntite([FromBody] CreateTypeEntiteCommand command)
         {
             Result<TypeEntiteDTO> result = await mediator.Send(command);
             if (!result.IsSuccess)
             {
-                return BadRequest(result);
+                return BadRequest(result.Error);
+            }
+            return Ok(result.Value);
+        }
+        [HttpGet("GetAllTypeEntites")]
+        public async Task<IActionResult> GetAllTypeEntites([FromQuery] GetAllTypeEntitiesQuery query)
+        {
+            Result<List<TypeEntiteDTO>> result = await mediator.Send(query);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Error);
             }
             return Ok(result.Value);
         }
