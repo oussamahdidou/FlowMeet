@@ -1,6 +1,7 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Common.Requests;
 using FlowMeet.Annuaire.Application.Features.DTOs.Responses.TypeEntite;
+using FlowMeet.Annuaire.Application.Features.Mappers;
 using FlowMeet.Annuaire.Application.Features.Queries;
 using FlowMeet.Annuaire.Domain.Common;
 
@@ -17,21 +18,16 @@ namespace FlowMeet.Annuaire.Application.Features.Handlers.TypeEntite
 
         public async Task<Result<List<TypeEntiteDTO>>> Handle(GetAllTypeEntitiesQuery request, CancellationToken cancellationToken)
         {
-            List<TypeEntiteDTO> typeEntites = await unitOfWork.TypeEntites.GetAsync(new QueryParameters<Domain.Entities.TypeEntite, TypeEntiteDTO>
+            List<Domain.Entities.TypeEntite> typeEntites = await unitOfWork.TypeEntites.GetAllAsync(new QueryParameters
             {
                 Filter = request.Filter,
                 OrderBy = request.OrderBy,
                 OrderByDescending = request.OrderByDescending,
                 Skip = request.Skip,
                 Take = request.Take,
-                Selector = e => new TypeEntiteDTO
-                {
-                    Id = e.Id,
-                    Label = e.Label,
-                    Level = e.Level
-                }
             });
-            return Result<List<TypeEntiteDTO>>.Success(typeEntites);
+            List<TypeEntiteDTO> typeEntiteDTOs = typeEntites.Select(x => x.FromTypeEntiteToTypeEntiteDTO()).ToList();
+            return Result<List<TypeEntiteDTO>>.Success(typeEntiteDTOs);
         }
     }
 }

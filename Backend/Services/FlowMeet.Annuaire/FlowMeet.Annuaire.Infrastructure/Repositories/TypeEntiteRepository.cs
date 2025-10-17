@@ -24,7 +24,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<List<TResult>> GetAsync<TResult>(QueryParameters<TypeEntite, TResult> queryParams) where TResult : class
+        public async Task<List<TypeEntite>> GetAllAsync(QueryParameters queryParams)
         {
             IQueryable<TypeEntite> query = dbContext.TypeEntites.AsQueryable();
 
@@ -43,9 +43,8 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
                 query = query.Skip(queryParams.Skip.Value);
             if (queryParams.Take.HasValue)
                 query = query.Take(queryParams.Take.Value);
-            if (queryParams.Selector != null)
-                return await query.Select(queryParams.Selector).ToListAsync();
-            return await query.Cast<TResult>().ToListAsync();
+
+            return await query.AsNoTracking().ToListAsync();
         }
 
         public async Task<TypeEntite?> GetByIdAsync(string id)
@@ -58,6 +57,9 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
             return await dbContext.TypeEntites.AnyAsync(x => x.Level == level);
         }
 
-
+        public async Task<bool> IsTypeEntiteExistAsync(string id)
+        {
+            return await dbContext.TypeEntites.AnyAsync(x => x.Id == id);
+        }
     }
 }
