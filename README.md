@@ -1,6 +1,7 @@
 # FlowMeet
 
 FlowMeet is an enterprise-grade, microservices-based platform designed for managing meetings with a modular and scalable architecture. It leverages modern technologies and follows best practices to ensure maintainability, security, and performance.
+![FlowMeet Logo](Frontend/sakai-ng/src/assets/img/flowMeetLogo.png)
 
 ## Table of Contents
 
