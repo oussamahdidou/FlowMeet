@@ -53,6 +53,14 @@ namespace FlowMeet.Annuaire.Infrastructure.Data.DbContexts
                 .HasOne(u => u.Groupe)
                 .WithMany(u => u.RoleGroupes)
                 .HasForeignKey(p => p.GroupeId);
+            //////////////////////////////////////////////
+            modelBuilder.Entity<Entite>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<TypeEntite>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Collaborateur>().HasQueryFilter(e => e.Active);
+            modelBuilder.Entity<Role>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Groupe>().HasQueryFilter(e => !e.IsDeleted);
+
+
         }
     }
 }

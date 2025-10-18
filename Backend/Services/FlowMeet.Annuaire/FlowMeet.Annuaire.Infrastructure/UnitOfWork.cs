@@ -8,14 +8,16 @@ namespace FlowMeet.Annuaire.Infrastructure
     {
         private readonly FlowMeetAnnuaireDbContext dbcontext;
         public ITypeEntiteRepository TypeEntites { get; }
-
         public IEntiteRepository Entites { get; }
-
-        public UnitOfWork(FlowMeetAnnuaireDbContext dbcontext, ITypeEntiteRepository typeEntiteRepository, IEntiteRepository entites)
+        public IRoleRepository Roles { get; }
+        public IGroupeRepository Groupes { get; }
+        public UnitOfWork(FlowMeetAnnuaireDbContext dbcontext, ITypeEntiteRepository typeEntiteRepository, IEntiteRepository entites, IRoleRepository roles, IGroupeRepository groupes)
         {
             this.dbcontext = dbcontext;
-            this.TypeEntites = typeEntiteRepository;
+            TypeEntites = typeEntiteRepository;
             Entites = entites;
+            Roles = roles;
+            Groupes = groupes;
         }
         public async Task SaveChanges()
         {

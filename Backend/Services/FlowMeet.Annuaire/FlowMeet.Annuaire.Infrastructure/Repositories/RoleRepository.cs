@@ -6,38 +6,38 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FlowMeet.Annuaire.Infrastructure.Repositories
 {
-    public class EntiteRepository : IEntiteRepository
+    public class RoleRepository : IRoleRepository
     {
         private readonly FlowMeetAnnuaireDbContext dbContext;
-        public EntiteRepository(FlowMeetAnnuaireDbContext dbContext)
+        public RoleRepository(FlowMeetAnnuaireDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
-        public async Task AddAsync(Entite entite)
+        public async Task AddAsync(Role role)
         {
-            await dbContext.Entites.AddAsync(entite);
+            await dbContext.Roles.AddAsync(role);
         }
 
-        public Task DeleteAsync(Entite entite)
+        public Task DeleteAsync(Role role)
         {
-            dbContext.Entites.Remove(entite);
+            dbContext.Roles.Remove(role);
             return Task.CompletedTask;
         }
 
-        public async Task<List<Entite>> GetAllAsync(QueryParameters queryParams)
+        public Task<List<Role>> GetAllAsync(QueryParameters queryParams)
         {
-            IQueryable<Entite> query = dbContext.Entites;
+            IQueryable<Role> query = dbContext.Roles;
             // Apply filtering
             if (!string.IsNullOrEmpty(queryParams.Filter))
             {
-                query = query.Where(e => e.Label.Contains(queryParams.Filter));
+                query = query.Where(r => r.Label.Contains(queryParams.Filter));
             }
             // Apply sorting
             if (!string.IsNullOrEmpty(queryParams.OrderBy))
             {
                 query = queryParams.OrderByDescending
-                    ? query.OrderByDescending(e => EF.Property<object>(e, queryParams.OrderBy))
-                    : query.OrderBy(e => EF.Property<object>(e, queryParams.OrderBy));
+                    ? query.OrderByDescending(r => EF.Property<object>(r, queryParams.OrderBy))
+                    : query.OrderBy(r => EF.Property<object>(r, queryParams.OrderBy));
             }
             // Apply pagination
             if (queryParams.Skip.HasValue)
@@ -48,12 +48,12 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
             {
                 query = query.Take(queryParams.Take.Value);
             }
-            return await query.AsNoTracking().ToListAsync();
+            return query.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Entite?> GetByIdAsync(string id)
+        public Task<Role?> GetByIdAsync(string id)
         {
-            return await dbContext.Entites.Include(x => x.TypeEntite).FirstOrDefaultAsync(e => e.Id == id);
+            return dbContext.Roles.FirstOrDefaultAsync(r => r.Id == id);
         }
     }
 }

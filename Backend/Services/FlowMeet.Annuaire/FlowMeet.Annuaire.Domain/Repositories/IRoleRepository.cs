@@ -1,0 +1,13 @@
+﻿using FlowMeet.Annuaire.Domain.Common;
+using FlowMeet.Annuaire.Domain.Entities;
+
+namespace FlowMeet.Annuaire.Domain.Repositories
+{
+    public interface IRoleRepository
+    {
+        Task AddAsync(Role role);
+        Task DeleteAsync(Role role);
+        Task<List<Role>> GetAllAsync(QueryParameters queryParams);
+        Task<Role?> GetByIdAsync(string id);
+    }
+}
