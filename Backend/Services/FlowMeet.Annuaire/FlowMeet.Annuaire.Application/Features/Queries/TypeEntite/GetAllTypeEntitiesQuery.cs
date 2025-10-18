@@ -2,7 +2,7 @@
 using FlowMeet.Annuaire.Application.Features.DTOs.Responses.TypeEntite;
 using FlowMeet.Annuaire.Domain.Common;
 
-namespace FlowMeet.Annuaire.Application.Features.Queries
+namespace FlowMeet.Annuaire.Application.Features.Queries.TypeEntite
 {
     public class GetAllTypeEntitiesQuery : IRequest<Result<List<TypeEntiteDTO>>>
     {

@@ -55,5 +55,103 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
         {
             return await dbContext.Entites.Include(x => x.TypeEntite).FirstOrDefaultAsync(e => e.Id == id);
         }
+        public async Task<Entite?> GetRootEntiteHiearchyAsync()
+        {
+
+            // 1️⃣ Fetch flat list from recursive CTE
+            var flatEntites = await dbContext.Entites
+                .FromSqlInterpolated($@"WITH RECURSIVE entite_tree AS (
+    SELECT *
+    FROM (
+        SELECT *
+        FROM ""Entites""
+        WHERE ""ParentId"" IS NULL
+        LIMIT 1
+    ) AS root
+
+    UNION ALL
+
+    SELECT e.*
+    FROM ""Entites"" e
+    INNER JOIN entite_tree t ON e.""ParentId"" = t.""Id""
+)
+SELECT *
+FROM entite_tree
+WHERE NOT ""IsDeleted""
+")
+                .AsNoTracking()
+                .ToListAsync();
+
+            if (!flatEntites.Any())
+                return null;
+
+            // 2️⃣ Build tree
+            var dict = flatEntites.ToDictionary(e => e.Id);
+
+            Entite root = null;
+
+            foreach (var ent in flatEntites)
+            {
+                if (ent.ParentId == null)
+                {
+                    root = ent;
+                }
+                else if (dict.TryGetValue(ent.ParentId, out var parent))
+                {
+                    parent.Enfants.Add(ent);
+                }
+            }
+
+            return root;
+        }
+        public async Task<Entite?> GetEntiteHiearchyAsync(string id)
+        {
+
+            // 1️⃣ Fetch flat list from recursive CTE
+            var flatEntites = await dbContext.Entites
+                .FromSqlInterpolated($@"
+                WITH RECURSIVE entite_tree AS (
+                    SELECT *
+                    FROM ""Entites""
+                    WHERE ""Id"" = {id}
+
+                    UNION ALL
+
+                    SELECT e.*
+                    FROM ""Entites"" e
+                    INNER JOIN entite_tree t ON e.""ParentId"" = t.""Id""
+                )
+                SELECT *
+                FROM entite_tree
+                ORDER BY ""ParentId"" NULLS FIRST, ""Id""
+            ")
+                .AsNoTracking()
+                .ToListAsync();
+
+            if (!flatEntites.Any())
+                return null;
+
+            // 2️⃣ Build tree
+            var dict = flatEntites.ToDictionary(e => e.Id);
+
+            Entite root = null;
+
+            foreach (var ent in flatEntites)
+            {
+                if (ent.Id == id)
+                {
+                    root = ent;
+                }
+                else if (dict.TryGetValue(ent.ParentId, out var parent))
+                {
+                    parent.Enfants.Add(ent);
+                }
+            }
+
+            return root;
+        }
     }
 }
+
+
+

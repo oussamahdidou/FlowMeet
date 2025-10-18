@@ -7,7 +7,9 @@ namespace FlowMeet.Annuaire.Domain.Repositories
     {
         Task AddAsync(Entite entite);
         Task<Entite?> GetByIdAsync(string id);
+        Task<Entite?> GetEntiteHiearchyAsync(string id);
         Task DeleteAsync(Entite entite);
         Task<List<Entite>> GetAllAsync(QueryParameters queryParams);
+        Task<Entite?> GetRootEntiteHiearchyAsync();
     }
 }

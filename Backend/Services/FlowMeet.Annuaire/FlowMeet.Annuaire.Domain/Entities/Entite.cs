@@ -1,6 +1,5 @@
 ﻿using FlowMeet.Annuaire.Domain.ValueObjects;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlowMeet.Annuaire.Domain.Entities
 {
@@ -13,18 +12,12 @@ namespace FlowMeet.Annuaire.Domain.Entities
         public string TypeEntiteId { get; set; }
         public TypeEntite TypeEntite { get; set; }
         public string? ParentId { get; set; }
-        public Entite Parent { get; set; }
+        public Entite? Parent { get; set; }
         public ICollection<Entite> Enfants { get; set; } = new List<Entite>();
         public ICollection<Role> Roles { get; set; } = new List<Role>();
         public ICollection<Groupe> Groupes { get; set; } = new List<Groupe>();
         public bool IsDeleted { get; set; } = false;
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     }
 }

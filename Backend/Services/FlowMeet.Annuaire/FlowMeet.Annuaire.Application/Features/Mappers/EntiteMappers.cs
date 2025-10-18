@@ -29,5 +29,15 @@ namespace FlowMeet.Annuaire.Application.Features.Mappers
                 Adresse = entite.Adresse,
             };
         }
+        public static EntiteHiearchieDTO FromEntiteToHiearchyDTO(this Entite entite)
+        {
+            return new EntiteHiearchieDTO
+            {
+                Id = entite.Id,
+                Label = entite.Label,
+                ParentId = entite.ParentId,
+                Enfants = entite.Enfants.Select(e => e.FromEntiteToHiearchyDTO()).ToList()
+            };
+        }
     }
 }
