@@ -24,5 +24,16 @@ namespace FlowMeet.Annuaire.API.Controllers
             }
             return BadRequest(result.Error);
         }
+        [HttpPost("AssignRolesToGroupe/{entiteId}")]
+        public async Task<IActionResult> AssignRolesToGroupe([FromRoute] string entiteId, [FromBody] AssignRoleToGroupeCommand command)
+        {
+            command.EntiteId = entiteId;
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
     }
 }

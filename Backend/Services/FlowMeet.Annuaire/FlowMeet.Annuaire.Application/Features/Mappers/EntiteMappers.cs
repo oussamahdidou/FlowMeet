@@ -36,6 +36,7 @@ namespace FlowMeet.Annuaire.Application.Features.Mappers
                 Id = entite.Id,
                 Label = entite.Label,
                 ParentId = entite.ParentId,
+                Type = entite.TypeEntite?.Label ?? string.Empty,
                 Enfants = entite.Enfants.Select(e => e.FromEntiteToHiearchyDTO()).ToList()
             };
         }

@@ -55,5 +55,63 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
         {
             return dbContext.Roles.FirstOrDefaultAsync(r => r.Id == id);
         }
+        /// <summary>
+        /// ✅ Get all roles of the entity and heritable roles from its parent entities.
+        /// </summary>
+        public async Task<List<Role>> GetEntityAndInheritedRolesAsync(string entiteId)
+        {
+            var roles = await dbContext.Roles
+                .FromSqlInterpolated($@"
+                WITH RECURSIVE entite_hierarchy AS (
+                    SELECT ""Id"", ""ParentId""
+                    FROM ""Entites""
+                    WHERE ""Id"" = {entiteId}
+
+                    UNION ALL
+
+                    SELECT e.""Id"", e.""ParentId""
+                    FROM ""Entites"" e
+                    INNER JOIN entite_hierarchy eh ON e.""Id"" = eh.""ParentId""
+                )
+                SELECT r.*
+                FROM ""Roles"" r
+                INNER JOIN entite_hierarchy eh ON r.""EntiteId"" = eh.""Id""
+                WHERE r.""IsDeleted"" = FALSE
+                  AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE);
+            ")
+                .AsNoTracking()
+                .ToListAsync();
+
+            return roles;
+        }
+
+        /// <summary>
+        /// ✅ Check if a role exists in the entity or in heritable parent roles.
+        /// </summary>
+        public async Task<bool> RoleExistsInEntityOrParentsAsync(string entiteId, string roleId)
+        {
+            return await dbContext.Roles
+      .FromSqlInterpolated($@"
+                WITH RECURSIVE entite_hierarchy AS (
+                    SELECT ""Id"", ""ParentId""
+                    FROM ""Entites""
+                    WHERE ""Id"" = {entiteId}
+
+                    UNION ALL
+
+                    SELECT e.""Id"", e.""ParentId""
+                    FROM ""Entites"" e
+                    INNER JOIN entite_hierarchy eh ON e.""Id"" = eh.""ParentId""
+                )
+                SELECT r.*
+                FROM ""Roles"" r
+                INNER JOIN entite_hierarchy eh ON r.""EntiteId"" = eh.""Id""
+                WHERE r.""IsDeleted"" = FALSE
+                  AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE);
+            ")
+      .AnyAsync(x => x.Id == roleId);
+
+        }
+
     }
 }

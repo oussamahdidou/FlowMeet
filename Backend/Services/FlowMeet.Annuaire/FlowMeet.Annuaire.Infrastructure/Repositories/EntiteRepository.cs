@@ -78,7 +78,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
 SELECT *
 FROM entite_tree
 WHERE NOT ""IsDeleted""
-")
+").Include(x => x.TypeEntite)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -124,7 +124,7 @@ WHERE NOT ""IsDeleted""
                 SELECT *
                 FROM entite_tree
                 ORDER BY ""ParentId"" NULLS FIRST, ""Id""
-            ")
+            ").Include(x => x.TypeEntite)
                 .AsNoTracking()
                 .ToListAsync();
 

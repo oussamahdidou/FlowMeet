@@ -55,5 +55,10 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<bool> GroupeExistsInEntiteAsync(string groupeId, string entiteId)
+        {
+            return await dbContext.Groupes.AnyAsync(g => g.Id == groupeId && g.EntiteId == entiteId);
+        }
     }
 }

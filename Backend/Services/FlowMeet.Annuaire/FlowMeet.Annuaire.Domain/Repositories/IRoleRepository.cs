@@ -9,5 +9,7 @@ namespace FlowMeet.Annuaire.Domain.Repositories
         Task DeleteAsync(Role role);
         Task<List<Role>> GetAllAsync(QueryParameters queryParams);
         Task<Role?> GetByIdAsync(string id);
+        Task<bool> RoleExistsInEntityOrParentsAsync(string entiteId, string roleId);
+        Task<List<Role>> GetEntityAndInheritedRolesAsync(string entiteId);
     }
 }

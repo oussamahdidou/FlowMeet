@@ -8,6 +8,7 @@ namespace FlowMeet.Annuaire.Application.Common.Interfaces
         IEntiteRepository Entites { get; }
         IRoleRepository Roles { get; }
         IGroupeRepository Groupes { get; }
+        IRoleGroupeRepository GroupeRoles { get; }
         Task SaveChanges();
     }
 }

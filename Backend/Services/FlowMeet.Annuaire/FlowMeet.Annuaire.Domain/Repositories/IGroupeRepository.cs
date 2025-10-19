@@ -8,5 +8,6 @@ namespace FlowMeet.Annuaire.Domain.Repositories
         Task AddAsync(Groupe groupe);
         Task<Groupe?> GetByIdAsync(string id);
         Task<List<Groupe>> GetAllAsync(QueryParameters queryParameters);
+        Task<bool> GroupeExistsInEntiteAsync(string groupeId, string entiteId);
     }
 }
