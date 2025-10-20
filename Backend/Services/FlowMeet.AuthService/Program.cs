@@ -121,6 +121,11 @@ app.UseAuthorization();
 app.MapControllers();
 await app.Migrate();
 await app.SeedDefaultUserAndRoleAsync();
+var kafkaBus = app.Services.CreateKafkaBus();
+await kafkaBus.StartAsync();
+
 await app.RunAsync();
+
+await kafkaBus.StopAsync();
 
 
