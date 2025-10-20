@@ -1,18 +1,18 @@
-﻿using Contracts.Events;
+﻿using Contracts.Events.Role;
 using Contracts.Helpers;
 using FlowMeet.Annuaire.Application.Common.Interfaces;
 using KafkaFlow.Producers;
 
 namespace FlowMeet.Annuaire.Infrastructure.Publishers
 {
-    public class TestPublisher : IPublisher<TestEvent>
+    public class RoleCreatedPublisher : IPublisher<RoleCreatedEvent>
     {
         private readonly IProducerAccessor producerAccessor;
-        public TestPublisher(IProducerAccessor producerAccessor)
+        public RoleCreatedPublisher(IProducerAccessor producerAccessor)
         {
             this.producerAccessor = producerAccessor;
         }
-        public async Task PublishAsync(TestEvent @event)
+        public async Task PublishAsync(RoleCreatedEvent @event)
         {
             var orderId = Guid.NewGuid().ToString();
 

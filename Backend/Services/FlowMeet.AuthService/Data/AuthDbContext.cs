@@ -8,5 +8,6 @@ namespace FlowMeet.AuthService.Data
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
         {
         }
+
     }
 }

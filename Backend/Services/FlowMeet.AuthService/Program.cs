@@ -1,4 +1,7 @@
+using Contracts.Helpers;
+using FlowMeet.AuthService.Consumers;
 using FlowMeet.AuthService.Data;
+using FlowMeet.AuthService.Extensions;
 using KafkaFlow;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -98,8 +101,7 @@ builder.Services.AddKafka(kafka => kafka
           .UseConsoleLog()
           .AddCluster(cluster => cluster
               .WithBrokers(new[] { builder.Configuration.GetConnectionString("MessageBroker") })
-          //.AddConsumer<TestEventHandler>("sample-topic", "sample-group")
-          //.AddProducer("producer-name", "sample-topic")
+          .AddConsumer<RoleCreatedHandler>(KafkaTopics.RoleCreated.ToString(), KafkaGroupes.AuthGroup.ToString())
           )
       );
 
@@ -118,7 +120,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 await app.Migrate();
-
-app.Run();
+await app.SeedDefaultUserAndRoleAsync();
+await app.RunAsync();
 
 

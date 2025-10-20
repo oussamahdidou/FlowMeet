@@ -8,6 +8,6 @@ namespace FlowMeet.Annuaire.Application.Features.Commands.Role
     {
         public string Label { get; set; }
         public bool Heritee { get; set; }
-        public string EntiteId { get; set; }
+        public string? EntiteId { get; set; }
     }
 }

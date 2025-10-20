@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Infrastructure\Contracts\Contracts.csproj" />
 		<ProjectReference Include="..\FlowMeet.Annuaire.Domain\FlowMeet.Annuaire.Domain.csproj" />
 	</ItemGroup>
 

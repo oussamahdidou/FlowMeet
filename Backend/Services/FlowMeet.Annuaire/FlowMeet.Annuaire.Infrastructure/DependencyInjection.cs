@@ -1,5 +1,5 @@
-﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
-using FlowMeet.Annuaire.Infrastructure.Consumers;
+﻿using Contracts.Helpers;
+using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Infrastructure.Data.DbContexts;
 using FlowMeet.Annuaire.Infrastructure.Extensions;
 using KafkaFlow;
@@ -25,8 +25,7 @@ namespace FlowMeet.Annuaire.Infrastructure
                .UseConsoleLog()
                .AddCluster(cluster => cluster
                    .WithBrokers(new[] { configuration.GetConnectionString("MessageBroker") })
-                    .AddConsumer<TestEventHandler>("sample-topic", "sample-group")//
-                    .AddProducer("producer-name", "sample-topic")
+                   .AddProducer(KafkaProducers.RoleCreatedProducer.ToString(), KafkaTopics.RoleCreated.ToString())
                )
            );
 
