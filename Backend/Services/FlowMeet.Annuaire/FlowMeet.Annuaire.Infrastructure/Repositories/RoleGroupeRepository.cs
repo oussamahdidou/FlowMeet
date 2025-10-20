@@ -1,6 +1,7 @@
 ﻿using FlowMeet.Annuaire.Domain.Entities;
 using FlowMeet.Annuaire.Domain.Repositories;
 using FlowMeet.Annuaire.Infrastructure.Data.DbContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlowMeet.Annuaire.Infrastructure.Repositories
 {
@@ -18,7 +19,12 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
 
         public Task DeleteAsync(RoleGroupe roleGroupe)
         {
-            throw new NotImplementedException();
+            dbContext.RoleGroupes.Remove(roleGroupe);
+            return Task.CompletedTask;
+        }
+        public async Task<RoleGroupe?> GetRoleGroupeAsync(string groupeId, string roleId)
+        {
+            return await dbContext.RoleGroupes.FirstOrDefaultAsync(x => x.GroupeId == groupeId && x.RoleId == roleId);
         }
     }
 }

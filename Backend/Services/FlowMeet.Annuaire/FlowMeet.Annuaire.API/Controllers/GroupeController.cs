@@ -35,5 +35,17 @@ namespace FlowMeet.Annuaire.API.Controllers
             }
             return BadRequest(result.Error);
         }
+        [HttpDelete("RemoveRolesFromGroupe/{entiteId}")]
+        public async Task<IActionResult> RemoveRolesFromGroupe([FromRoute] string entiteId, [FromBody] RemoveRoleFromGroupeCommand command)
+        {
+            command.EntiteId = entiteId;
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+
+        }
     }
 }

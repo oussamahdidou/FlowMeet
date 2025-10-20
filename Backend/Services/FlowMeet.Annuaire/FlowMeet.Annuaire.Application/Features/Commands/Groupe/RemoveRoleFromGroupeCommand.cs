@@ -4,7 +4,7 @@ using FlowMeet.Annuaire.Domain.Common;
 
 namespace FlowMeet.Annuaire.Application.Features.Commands.Groupe
 {
-    public class AssignRoleToGroupeCommand : IRequest<Result<Unit>>
+    public class RemoveRoleFromGroupeCommand : IRequest<Result<Unit>>
     {
         public string GroupeId { get; set; }
         public string RoleId { get; set; }
