@@ -1,7 +1,5 @@
 ﻿using FlowMeet.ServiceRendezVous.Application.Common.Interfaces;
-using FlowMeet.ServiceRendezVous.Infrastructure.Consumers;
 using FlowMeet.ServiceRendezVous.Infrastructure.Data.DbContexts;
-using FlowMeet.ServiceRendezVous.Infrastructure.Extensions;
 using KafkaFlow;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,8 +22,7 @@ namespace FlowMeet.ServiceRendezVous.Infrastructure
                     .UseConsoleLog()
                     .AddCluster(cluster => cluster
                         .WithBrokers(new[] { configuration.GetConnectionString("MessageBroker") })
-                         .AddConsumer<TestEventHandler>("sample-topic", "sample-group")//
-                         .AddProducer("producer-name", "sample-topic")
+
                     )
                 );
 

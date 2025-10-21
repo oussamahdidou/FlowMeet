@@ -26,7 +26,8 @@ namespace FlowMeet.Annuaire.Infrastructure
                .AddCluster(cluster => cluster
                    .WithBrokers(new[] { configuration.GetConnectionString("MessageBroker") })
                    .AddProducer(KafkaProducers.RoleCreatedProducer.ToString(), KafkaTopics.RoleCreated.ToString())
-               )
+                   .AddProducer(KafkaProducers.RoleAssignedToGroupProducer.ToString(), KafkaTopics.RoleAssignedToGroup.ToString())
+                   )
            );
 
             services.AddDbContext<FlowMeetAnnuaireDbContext>(options =>

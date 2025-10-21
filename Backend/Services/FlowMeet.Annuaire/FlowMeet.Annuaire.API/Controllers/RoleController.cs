@@ -24,7 +24,7 @@ namespace FlowMeet.Annuaire.API.Controllers
             {
                 return BadRequest(result.Error);
             }
-            return Ok(result);
+            return Ok(result.Value);
         }
     }
 }

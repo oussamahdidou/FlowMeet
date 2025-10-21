@@ -1,4 +1,5 @@
-﻿using FlowMeet.Annuaire.Application.Common;
+﻿using Contracts.Events.Groupe;
+using FlowMeet.Annuaire.Application.Common;
 using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Common.Requests;
 using FlowMeet.Annuaire.Application.Features.Commands.Groupe;
@@ -9,9 +10,11 @@ namespace FlowMeet.Annuaire.Application.Features.Handlers.Groupe
     public class AssignRoleToGroupeCommandHandler : IRequestHandler<AssignRoleToGroupeCommand, Result<Unit>>
     {
         private readonly IUnitOfWork unitOfWork;
-        public AssignRoleToGroupeCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IPublisher<RoleAssignedToGroupeEvent> publisher;
+        public AssignRoleToGroupeCommandHandler(IUnitOfWork unitOfWork, IPublisher<RoleAssignedToGroupeEvent> publisher)
         {
             this.unitOfWork = unitOfWork;
+            this.publisher = publisher;
         }
         public async Task<Result<Unit>> Handle(AssignRoleToGroupeCommand request, CancellationToken cancellationToken)
         {
@@ -30,6 +33,9 @@ namespace FlowMeet.Annuaire.Application.Features.Handlers.Groupe
                 GroupeId = request.GroupeId,
                 RoleId = request.RoleId
             });
+            //publish event RoleAssignedToGroupeEvent
+            await publisher.PublishAsync(new RoleAssignedToGroupeEvent(request.RoleId, request.GroupeId));
+            //commit transaction
             await unitOfWork.SaveChanges();
             return Result<Unit>.Success(Unit.Value);
         }

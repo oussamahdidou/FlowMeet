@@ -31,4 +31,8 @@
 		<ProjectReference Include="..\FlowMeet.Annuaire.Domain\FlowMeet.Annuaire.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Consumers\" />
+	</ItemGroup>
+
 </Project>

@@ -77,7 +77,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
                 FROM ""Roles"" r
                 INNER JOIN entite_hierarchy eh ON r.""EntiteId"" = eh.""Id""
                 WHERE r.""IsDeleted"" = FALSE
-                  AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE);
+                  AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE)
             ")
                 .AsNoTracking()
                 .ToListAsync();
@@ -107,7 +107,7 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
                 FROM ""Roles"" r
                 INNER JOIN entite_hierarchy eh ON r.""EntiteId"" = eh.""Id""
                 WHERE r.""IsDeleted"" = FALSE
-                  AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE);
+                  AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE)
             ")
       .AnyAsync(x => x.Id == roleId);
 

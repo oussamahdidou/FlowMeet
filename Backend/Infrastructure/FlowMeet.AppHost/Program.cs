@@ -1,6 +1,6 @@
 var builder = DistributedApplication.CreateBuilder(args);
 var postgres = builder.AddPostgres("postgresql", port: 5432)
-    .WithPgAdmin()
+    .WithPgWeb()
     .WithVolume("flowmeet", "/var/lib/postgresql/data");
 
 var kafka = builder.AddKafka("kafka")

@@ -2,9 +2,7 @@
 {
     public enum KafkaTopics
     {
-        CollaborateurCreated,
-        CollaborateurUpdated,
-        CollaborateurDeleted,
         RoleCreated,
+        RoleAssignedToGroup,
     }
 }

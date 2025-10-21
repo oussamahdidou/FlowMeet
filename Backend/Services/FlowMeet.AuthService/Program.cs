@@ -75,7 +75,8 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme =
     options.DefaultSignInScheme =
     options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
+})
+    .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -102,6 +103,7 @@ builder.Services.AddKafka(kafka => kafka
           .AddCluster(cluster => cluster
               .WithBrokers(new[] { builder.Configuration.GetConnectionString("MessageBroker") })
           .AddConsumer<RoleCreatedHandler>(KafkaTopics.RoleCreated.ToString(), KafkaGroupes.AuthGroup.ToString())
+          .AddConsumer<RoleAssignedToGroupeConsumer>(KafkaTopics.RoleAssignedToGroup.ToString(), KafkaGroupes.AuthGroup.ToString())
           )
       );
 

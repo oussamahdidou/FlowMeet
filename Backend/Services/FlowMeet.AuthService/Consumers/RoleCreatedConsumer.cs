@@ -6,15 +6,15 @@ namespace FlowMeet.AuthService.Consumers
 {
     public class RoleCreatedHandler : IMessageHandler<RoleCreatedEvent>
     {
-        private readonly IServiceScopeFactory _scopeFactory;
+        private readonly IServiceScopeFactory scopeFactory;
 
         public RoleCreatedHandler(IServiceScopeFactory scopeFactory)
         {
-            _scopeFactory = scopeFactory;
+            this.scopeFactory = scopeFactory;
         }
         public async Task Handle(IMessageContext context, RoleCreatedEvent message)
         {
-            using var scope = _scopeFactory.CreateScope();
+            using var scope = scopeFactory.CreateScope();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var roleExists = await roleManager.RoleExistsAsync(message.Label);
             if (!roleExists)

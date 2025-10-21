@@ -2,7 +2,7 @@
 {
     public enum KafkaProducers
     {
-        CollaborateurCreatedProducer,
         RoleCreatedProducer,
+        RoleAssignedToGroupProducer,
     }
 }
