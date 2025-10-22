@@ -3,6 +3,7 @@ using FlowMeet.AuthService.Consumers;
 using FlowMeet.AuthService.Data;
 using FlowMeet.AuthService.Extensions;
 using KafkaFlow;
+using KafkaFlow.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -105,7 +106,9 @@ builder.Services.AddKafka(kafka => kafka
               .WithBrokers(new[] { builder.Configuration.GetConnectionString("MessageBroker") })
           .AddConsumer<RoleCreatedHandler>(KafkaTopics.RoleCreated.ToString(), KafkaGroupes.AuthGroup.ToString())
           .AddConsumer<RoleAssignedToGroupeConsumer>(KafkaTopics.RoleAssignedToGroup.ToString(), KafkaGroupes.AuthGroup.ToString())
-          )
+          .AddConsumer<RoleRemovedFromGroupeConsumer>(KafkaTopics.RoleRemovedFromGroup.ToString(), KafkaGroupes.AuthGroup.ToString())
+
+          ).AddOpenTelemetryInstrumentation()
       );
 
 var app = builder.Build();

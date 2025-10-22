@@ -28,6 +28,7 @@ namespace FlowMeet.Annuaire.Infrastructure
                    .WithBrokers(new[] { configuration.GetConnectionString("MessageBroker") })
                    .AddProducer(KafkaProducers.RoleCreatedProducer.ToString(), KafkaTopics.RoleCreated.ToString())
                    .AddProducer(KafkaProducers.RoleAssignedToGroupProducer.ToString(), KafkaTopics.RoleAssignedToGroup.ToString())
+                   .AddProducer(KafkaProducers.RoleRemovedFromGroupProducer.ToString(), KafkaTopics.RoleRemovedFromGroup.ToString())
                    )
                 .AddOpenTelemetryInstrumentation()
 

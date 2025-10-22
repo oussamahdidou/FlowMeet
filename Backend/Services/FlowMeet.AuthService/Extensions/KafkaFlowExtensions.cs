@@ -22,6 +22,7 @@ namespace FlowMeet.AuthService.Extensions
                 .WithGroupId(groupId)
                 .WithBufferSize(bufferSize)
                 .WithWorkersCount(workersCount)
+                .WithAutoOffsetReset(AutoOffsetReset.Earliest)
                 .AddMiddlewares(middlewares => middlewares
                     .AddDeserializer<JsonCoreDeserializer>()
                     .AddTypedHandlers(handlers => handlers.AddHandler<THandler>())

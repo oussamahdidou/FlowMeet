@@ -1,4 +1,5 @@
-﻿using FlowMeet.Annuaire.Application.Common;
+﻿using Contracts.Events.Groupe;
+using FlowMeet.Annuaire.Application.Common;
 using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Common.Requests;
 using FlowMeet.Annuaire.Application.Features.Commands.Groupe;
@@ -10,9 +11,11 @@ namespace FlowMeet.Annuaire.Application.Features.Handlers.Groupe
     public class RemoveRoleFromGroupeCommandHandler : IRequestHandler<RemoveRoleFromGroupeCommand, Result<Unit>>
     {
         private readonly IUnitOfWork unitOfWork;
-        public RemoveRoleFromGroupeCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IPublisher<RoleRemovedFromGroupeEvent> publisher;
+        public RemoveRoleFromGroupeCommandHandler(IUnitOfWork unitOfWork, IPublisher<RoleRemovedFromGroupeEvent> publisher)
         {
             this.unitOfWork = unitOfWork;
+            this.publisher = publisher;
         }
         public async Task<Result<Unit>> Handle(RemoveRoleFromGroupeCommand request, CancellationToken cancellationToken)
         {
@@ -32,6 +35,7 @@ namespace FlowMeet.Annuaire.Application.Features.Handlers.Groupe
                 return Result<Unit>.Failure("Le rôle n'est pas assigné au groupe.");
             }
             await unitOfWork.GroupeRoles.DeleteAsync(existingRoleGroupe);
+            await publisher.PublishAsync(new RoleRemovedFromGroupeEvent(request.RoleId, request.GroupeId));
             await unitOfWork.SaveChanges();
             return Result<Unit>.Success(Unit.Value);
         }
