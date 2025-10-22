@@ -2,11 +2,14 @@ using FlowMeet.Annuaire.API.Middleware;
 using FlowMeet.Annuaire.Application;
 using FlowMeet.Annuaire.Infrastructure;
 using FlowMeet.Annuaire.Infrastructure.Extensions;
+
 using KafkaFlow;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 var builder = WebApplication.CreateBuilder(args);
+
 builder.AddServiceDefaults();
+//
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -59,6 +62,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddTransient<ExceptionMiddleware>();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

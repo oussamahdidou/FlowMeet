@@ -4,7 +4,7 @@ using FlowMeet.Notification.Infrastructure.Extensions;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 var builder = WebApplication.CreateBuilder(args);
-builder.AddServiceDefaults();
+//
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

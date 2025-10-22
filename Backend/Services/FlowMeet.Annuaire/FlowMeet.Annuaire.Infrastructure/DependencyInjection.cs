@@ -3,6 +3,7 @@ using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Infrastructure.Data.DbContexts;
 using FlowMeet.Annuaire.Infrastructure.Extensions;
 using KafkaFlow;
+using KafkaFlow.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,9 @@ namespace FlowMeet.Annuaire.Infrastructure
                    .AddProducer(KafkaProducers.RoleCreatedProducer.ToString(), KafkaTopics.RoleCreated.ToString())
                    .AddProducer(KafkaProducers.RoleAssignedToGroupProducer.ToString(), KafkaTopics.RoleAssignedToGroup.ToString())
                    )
+                .AddOpenTelemetryInstrumentation()
+
+
            );
 
             services.AddDbContext<FlowMeetAnnuaireDbContext>(options =>
