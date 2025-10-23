@@ -58,9 +58,9 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
         /// <summary>
         /// ✅ Get all roles of the entity and heritable roles from its parent entities.
         /// </summary>
-        public async Task<List<Role>> GetEntityAndInheritedRolesAsync(string entiteId)
+        public async Task<List<Role>> GetEntityAndInheritedRolesAsync(string entiteId, QueryParameters parameters)
         {
-            var roles = await dbContext.Roles
+            var query = dbContext.Roles
                 .FromSqlInterpolated($@"
                 WITH RECURSIVE entite_hierarchy AS (
                     SELECT ""Id"", ""ParentId""
@@ -78,9 +78,29 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
                 INNER JOIN entite_hierarchy eh ON r.""EntiteId"" = eh.""Id""
                 WHERE r.""IsDeleted"" = FALSE
                   AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE)
-            ")
-                .AsNoTracking()
-                .ToListAsync();
+            ");
+            // Apply filtering
+            if (!string.IsNullOrEmpty(parameters.Filter))
+            {
+                query = query.Where(r => r.Label.Contains(parameters.Filter));
+            }
+            // Apply sorting
+            if (!string.IsNullOrEmpty(parameters.OrderBy))
+            {
+                query = parameters.OrderByDescending
+                    ? query.OrderByDescending(r => EF.Property<object>(r, parameters.OrderBy))
+                    : query.OrderBy(r => EF.Property<object>(r, parameters.OrderBy));
+            }
+            // Apply pagination
+            if (parameters.Skip.HasValue)
+            {
+                query = query.Skip(parameters.Skip.Value);
+            }
+            if (parameters.Take.HasValue)
+            {
+                query = query.Take(parameters.Take.Value);
+            }
+            var roles = await query.AsNoTracking().ToListAsync();
 
             return roles;
         }

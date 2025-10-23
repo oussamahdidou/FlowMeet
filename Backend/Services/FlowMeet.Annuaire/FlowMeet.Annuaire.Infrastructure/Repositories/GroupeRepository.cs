@@ -60,5 +60,81 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
         {
             return await dbContext.Groupes.AnyAsync(g => g.Id == groupeId && g.EntiteId == entiteId);
         }
+
+        public async Task<List<Groupe>> GroupeExistsInEntityOrParentsAsync(string entiteId, QueryParameters parameters)
+        {
+            var query = dbContext.Groupes
+                .FromSqlInterpolated($@"
+                WITH RECURSIVE entite_hierarchy AS (
+                    SELECT ""Id"", ""ParentId""
+                    FROM ""Entites""
+                    WHERE ""Id"" = {entiteId}
+
+                    UNION ALL
+
+                    SELECT e.""Id"", e.""ParentId""
+                    FROM ""Entites"" e
+                    INNER JOIN entite_hierarchy eh ON e.""Id"" = eh.""ParentId""
+                )
+                SELECT r.*
+                FROM ""Groupes"" r
+                INNER JOIN entite_hierarchy eh ON r.""EntiteId"" = eh.""Id""
+                WHERE r.""IsDeleted"" = FALSE
+                  AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE)
+            ");
+            // Apply filtering
+            if (!string.IsNullOrEmpty(parameters.Filter))
+            {
+                query = query.Where(g => g.Label.Contains(parameters.Filter));
+            }
+            // Apply sorting
+            if (!string.IsNullOrEmpty(parameters.OrderBy))
+            {
+                query = parameters.OrderByDescending
+                    ? query.OrderByDescending(g => EF.Property<object>(g, parameters.OrderBy))
+                    : query.OrderBy(g => EF.Property<object>(g, parameters.OrderBy));
+            }
+            // Apply pagination
+            if (parameters.Skip.HasValue)
+            {
+                query = query.Skip(parameters.Skip.Value);
+            }
+            if (parameters.Take.HasValue)
+            {
+                query = query.Take(parameters.Take.Value);
+            }
+            var groupes = await query.AsNoTracking().ToListAsync();
+
+
+
+
+            return groupes;
+        }
+
+        public async Task<bool> GroupeExistsInEntityOrParentsAsync(string entiteId, string groupeId)
+        {
+            return await dbContext.Groupes
+        .FromSqlInterpolated($@"
+                WITH RECURSIVE entite_hierarchy AS (
+                    SELECT ""Id"", ""ParentId""
+                    FROM ""Entites""
+                    WHERE ""Id"" = {entiteId}
+
+                    UNION ALL
+
+                    SELECT e.""Id"", e.""ParentId""
+                    FROM ""Entites"" e
+                    INNER JOIN entite_hierarchy eh ON e.""Id"" = eh.""ParentId""
+                )
+                SELECT r.*
+                FROM ""Groupes"" r
+                INNER JOIN entite_hierarchy eh ON r.""EntiteId"" = eh.""Id""
+                WHERE r.""IsDeleted"" = FALSE
+                  AND (r.""EntiteId"" = {entiteId} OR r.""Heritee"" = TRUE)
+            ")
+        .AnyAsync(x => x.Id == groupeId);
+
+        }
+
     }
 }

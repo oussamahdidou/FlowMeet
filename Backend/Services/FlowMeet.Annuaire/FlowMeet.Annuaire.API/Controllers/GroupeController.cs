@@ -1,5 +1,7 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Features.Commands.Groupe;
+using FlowMeet.Annuaire.Application.Features.Queries.Groupe;
+using FlowMeet.Annuaire.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowMeet.Annuaire.API.Controllers
@@ -71,6 +73,38 @@ namespace FlowMeet.Annuaire.API.Controllers
         public async Task<IActionResult> AdminRemoveRolesFromGroupe([FromBody] AdminRemoveRoleFromGroupeCommand command)
         {
             var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
+        [HttpGet("GetAllGroupes")]
+        public async Task<IActionResult> GetAllGroupes([FromQuery] GetAllGroupesQuery query)
+        {
+            var result = await mediator.Send(query);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
+        [HttpGet("GetEntiteGroupes/{entiteId}")]
+        public async Task<IActionResult> GetEntiteGroupes([FromRoute] string entiteId, [FromQuery] QueryParameters query)
+        {
+            var getEntiteGroupesQuery = new GetEntiteGroupeQuery
+            {
+                EntiteId = entiteId,
+                Parameters = new QueryParameters
+                {
+                    Filter = query.Filter,
+                    OrderBy = query.OrderBy,
+                    OrderByDescending = query.OrderByDescending,
+                    Skip = query.Skip,
+                    Take = query.Take
+                }
+            };
+            var result = await mediator.Send(getEntiteGroupesQuery);
             if (result.IsSuccess)
             {
                 return Ok(result.Value);
