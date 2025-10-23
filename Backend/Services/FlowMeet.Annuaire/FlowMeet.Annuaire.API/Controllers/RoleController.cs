@@ -26,5 +26,15 @@ namespace FlowMeet.Annuaire.API.Controllers
             }
             return Ok(result.Value);
         }
+        [HttpPost("AdminCreateRole")]
+        public async Task<IActionResult> AdminCreateRole([FromBody] AdminCreateRoleCommand command)
+        {
+            Result<RoleDTO> result = await mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Error);
+            }
+            return Ok(result.Value);
+        }
     }
 }

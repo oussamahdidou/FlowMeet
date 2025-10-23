@@ -47,5 +47,35 @@ namespace FlowMeet.Annuaire.API.Controllers
             return BadRequest(result.Error);
 
         }
+        [HttpPost("AdminCreateGroupe")]
+        public async Task<IActionResult> AdminCreateGroupe([FromBody] AdminCreateGroupeCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
+        [HttpPost("AdminAssignRolesToGroupe")]
+        public async Task<IActionResult> AdminAssignRolesToGroupe([FromBody] AdminAssignRoleToGroupeCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
+        [HttpDelete("AdminRemoveRolesFromGroupe")]
+        public async Task<IActionResult> AdminRemoveRolesFromGroupe([FromBody] AdminRemoveRoleFromGroupeCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
     }
 }

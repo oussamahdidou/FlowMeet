@@ -1,6 +1,6 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Features.Commands.Entite;
-using FlowMeet.Annuaire.Application.Features.Queries.TypeEntite;
+using FlowMeet.Annuaire.Application.Features.Queries.Entite;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowMeet.Annuaire.API.Controllers
