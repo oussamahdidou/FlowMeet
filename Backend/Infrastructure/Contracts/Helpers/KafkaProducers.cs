@@ -4,6 +4,7 @@
     {
         RoleCreatedProducer,
         RoleAssignedToGroupProducer,
-        RoleRemovedFromGroupProducer
+        RoleRemovedFromGroupProducer,
+        CollaborateurCreatedProducer,
     }
 }

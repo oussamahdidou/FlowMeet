@@ -1,4 +1,4 @@
-﻿namespace FlowMeet.Annuaire.Application.Features.DTOs.Responses.TypeEntite
+﻿namespace FlowMeet.Annuaire.Application.Features.DTOs.TypeEntite
 {
     public class TypeEntiteDTO
     {

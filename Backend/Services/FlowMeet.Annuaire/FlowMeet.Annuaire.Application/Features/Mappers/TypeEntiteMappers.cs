@@ -1,4 +1,4 @@
-﻿using FlowMeet.Annuaire.Application.Features.DTOs.Responses.TypeEntite;
+﻿using FlowMeet.Annuaire.Application.Features.DTOs.TypeEntite;
 
 namespace FlowMeet.Annuaire.Application.Features.Mappers
 {

@@ -1,5 +1,5 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Requests;
-using FlowMeet.Annuaire.Application.Features.DTOs.Responses.Role;
+using FlowMeet.Annuaire.Application.Features.DTOs.Role;
 using FlowMeet.Annuaire.Domain.Common;
 
 namespace FlowMeet.Annuaire.Application.Features.Queries.Role

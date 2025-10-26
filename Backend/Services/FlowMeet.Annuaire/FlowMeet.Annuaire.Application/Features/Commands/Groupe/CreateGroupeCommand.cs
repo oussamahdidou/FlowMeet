@@ -1,5 +1,5 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Requests;
-using FlowMeet.Annuaire.Application.Features.DTOs.Responses.Groupe;
+using FlowMeet.Annuaire.Application.Features.DTOs.Groupe;
 using FlowMeet.Annuaire.Domain.Common;
 using System.Text.Json.Serialization;
 

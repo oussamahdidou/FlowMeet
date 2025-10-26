@@ -1,4 +1,4 @@
-﻿namespace FlowMeet.Annuaire.Application.Features.DTOs.Responses.Groupe
+﻿namespace FlowMeet.Annuaire.Application.Features.DTOs.Groupe
 {
     public class GroupeDTO
     {

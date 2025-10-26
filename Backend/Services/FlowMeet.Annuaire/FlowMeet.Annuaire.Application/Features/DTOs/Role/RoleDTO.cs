@@ -1,4 +1,4 @@
-﻿namespace FlowMeet.Annuaire.Application.Features.DTOs.Responses.Role
+﻿namespace FlowMeet.Annuaire.Application.Features.DTOs.Role
 {
     public class RoleDTO
     {

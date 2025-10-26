@@ -1,6 +1,6 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Features.Commands.TypeEntite;
-using FlowMeet.Annuaire.Application.Features.DTOs.Responses.TypeEntite;
+using FlowMeet.Annuaire.Application.Features.DTOs.TypeEntite;
 using FlowMeet.Annuaire.Application.Features.Queries.TypeEntite;
 using FlowMeet.Annuaire.Domain.Common;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,5 @@
 ﻿using FlowMeet.Annuaire.Application.Features.Commands.Entite;
-using FlowMeet.Annuaire.Application.Features.DTOs.Responses.Entite;
+using FlowMeet.Annuaire.Application.Features.DTOs.Entite;
 using FlowMeet.Annuaire.Domain.Entities;
 
 namespace FlowMeet.Annuaire.Application.Features.Mappers

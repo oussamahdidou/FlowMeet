@@ -1,6 +1,6 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Features.Commands.Role;
-using FlowMeet.Annuaire.Application.Features.DTOs.Responses.Role;
+using FlowMeet.Annuaire.Application.Features.DTOs.Role;
 using FlowMeet.Annuaire.Application.Features.Queries.Role;
 using FlowMeet.Annuaire.Domain.Common;
 using Microsoft.AspNetCore.Mvc;

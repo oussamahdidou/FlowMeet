@@ -1,5 +1,5 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Requests;
-using FlowMeet.Annuaire.Application.Features.DTOs.Responses.Entite;
+using FlowMeet.Annuaire.Application.Features.DTOs.Entite;
 using FlowMeet.Annuaire.Domain.Common;
 using FlowMeet.Annuaire.Domain.ValueObjects;
 

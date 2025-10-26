@@ -1,4 +1,4 @@
-﻿using FlowMeet.Annuaire.Application.Features.DTOs.Responses.Account;
+﻿using FlowMeet.Annuaire.Application.Features.DTOs.Account;
 
 namespace FlowMeet.Annuaire.Application.Common.Interfaces
 {

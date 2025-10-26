@@ -1,7 +1,7 @@
 ﻿using FlowMeet.Annuaire.Application.Common.Interfaces;
 using FlowMeet.Annuaire.Application.Common.Requests;
 using FlowMeet.Annuaire.Application.Features.Commands.Entite;
-using FlowMeet.Annuaire.Application.Features.DTOs.Responses.Entite;
+using FlowMeet.Annuaire.Application.Features.DTOs.Entite;
 using FlowMeet.Annuaire.Application.Features.Mappers;
 using FlowMeet.Annuaire.Domain.Common;
 

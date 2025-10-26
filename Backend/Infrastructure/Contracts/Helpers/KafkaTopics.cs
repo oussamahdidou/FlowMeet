@@ -4,6 +4,7 @@
     {
         RoleCreated,
         RoleAssignedToGroup,
-        RoleRemovedFromGroup
+        RoleRemovedFromGroup,
+        CollaborateurCreated,
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace FlowMeet.Annuaire.Application.Features.DTOs.Responses.Account
+﻿namespace FlowMeet.Annuaire.Application.Features.DTOs.Account
 {
     public class UserDto
     {
