@@ -7,6 +7,8 @@ namespace FlowMeet.Annuaire.Domain.Repositories
         Task<bool> IsUserNameExistAsync(string userName);
         Task<bool> IsEmailExistAsync(string email);
         Task AddAsync(Collaborateur collaborateur);
+        Task<bool> ExistsInEntiteAsync(string collaborateurId, string entiteId);
+
 
     }
 }

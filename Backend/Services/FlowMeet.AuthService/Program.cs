@@ -108,6 +108,7 @@ builder.Services.AddKafka(kafka => kafka
           .AddConsumer<RoleAssignedToGroupeConsumer>(KafkaTopics.RoleAssignedToGroup.ToString(), KafkaGroupes.AuthGroup.ToString())
           .AddConsumer<RoleRemovedFromGroupeConsumer>(KafkaTopics.RoleRemovedFromGroup.ToString(), KafkaGroupes.AuthGroup.ToString())
           .AddConsumer<CollaborateurCreatedConsumer>(KafkaTopics.CollaborateurCreated.ToString(), KafkaGroupes.AuthGroup.ToString())
+          .AddConsumer<RoleAssignedToCollaborateurConsumer>(KafkaTopics.RoleAssignedToCollaborateur.ToString(), KafkaGroupes.AuthGroup.ToString())
           ).AddOpenTelemetryInstrumentation()
       );
 

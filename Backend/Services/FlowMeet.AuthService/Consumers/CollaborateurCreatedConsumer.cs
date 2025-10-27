@@ -16,6 +16,7 @@ namespace FlowMeet.AuthService.Consumers
         {
             using var scope = scopeFactory.CreateScope();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var AppUser = new AppUser
             {
                 Id = message.Id,
@@ -35,7 +36,7 @@ namespace FlowMeet.AuthService.Consumers
                 new Claim("entiteId", message.EntiteId),
                 new Claim("active", message.Active.ToString()),
             });
-
+            await userManager.AddToRoleAsync(AppUser, "Collaborateur");
         }
     }
 }

@@ -30,6 +30,8 @@ namespace FlowMeet.Annuaire.Infrastructure
                    .AddProducer(KafkaProducers.RoleAssignedToGroupProducer.ToString(), KafkaTopics.RoleAssignedToGroup.ToString())
                    .AddProducer(KafkaProducers.RoleRemovedFromGroupProducer.ToString(), KafkaTopics.RoleRemovedFromGroup.ToString())
                    .AddProducer(KafkaProducers.CollaborateurCreatedProducer.ToString(), KafkaTopics.CollaborateurCreated.ToString())
+                   .AddProducer(KafkaProducers.RoleAssignedToCollaborateurProducer.ToString(), KafkaTopics.RoleAssignedToCollaborateur.ToString())
+                   .AddProducer(KafkaProducers.RoleRemovedFromCollaborateurProducer.ToString(), KafkaTopics.RoleRemovedFromCollaborateur.ToString())
                    )
 
                 .AddOpenTelemetryInstrumentation()

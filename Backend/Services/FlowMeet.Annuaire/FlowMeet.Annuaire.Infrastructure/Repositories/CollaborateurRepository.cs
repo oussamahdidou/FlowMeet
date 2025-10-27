@@ -17,6 +17,11 @@ namespace FlowMeet.Annuaire.Infrastructure.Repositories
             await dbContext.Collaborateurs.AddAsync(collaborateur);
         }
 
+        public async Task<bool> ExistsInEntiteAsync(string collaborateurId, string entiteId)
+        {
+            return await dbContext.Collaborateurs.AnyAsync(c => c.Id == collaborateurId && c.EntiteId == entiteId);
+        }
+
         public async Task<bool> IsEmailExistAsync(string email)
         {
             return await dbContext.Collaborateurs.AnyAsync(c => c.Email == email);
