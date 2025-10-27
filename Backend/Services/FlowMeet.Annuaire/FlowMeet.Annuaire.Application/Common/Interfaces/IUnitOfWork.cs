@@ -11,6 +11,7 @@ namespace FlowMeet.Annuaire.Application.Common.Interfaces
         IRoleGroupeRepository GroupeRoles { get; }
         IRoleCollaborateurRepository CollaborateurRoles { get; }
         ICollaborateurRepository Collaborateurs { get; }
+        ICollaborateurGroupeRepository CollaborateurGroupes { get; }
         Task SaveChanges();
     }
 }

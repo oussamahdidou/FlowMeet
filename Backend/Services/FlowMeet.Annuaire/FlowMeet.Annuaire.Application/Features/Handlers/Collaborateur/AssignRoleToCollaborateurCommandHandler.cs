@@ -40,7 +40,7 @@ namespace FlowMeet.Annuaire.Application.Features.Handlers.Collaborateur
             };
             await unitOfWork.CollaborateurRoles.AddAsync(collaborateurRole);
             //publish event RoleAssignedToCollaborateurEvent
-            await publisher.PublishAsync(new RoleAssignedToCollaborateurEvent(request.RoleId, request.CollaborateurId));
+            await publisher.PublishAsync(new RoleAssignedToCollaborateurEvent(request.CollaborateurId, request.RoleId));
             //commit transaction
             await unitOfWork.SaveChanges();
             return Result<Unit>.Success(Unit.Value);

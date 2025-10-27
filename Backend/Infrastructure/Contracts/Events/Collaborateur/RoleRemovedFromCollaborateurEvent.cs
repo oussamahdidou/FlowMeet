@@ -1,6 +1,6 @@
 ﻿namespace Contracts.Events.Collaborateur
 {
-    public record RoleRemovedFromCollaborateurEvent(string RoleId, string CollaborateurId);
+    public record RoleRemovedFromCollaborateurEvent(string CollaborateurId, string RoleId);
 
 
 }

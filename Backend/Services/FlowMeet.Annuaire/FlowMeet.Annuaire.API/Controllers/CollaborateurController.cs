@@ -66,5 +66,47 @@ namespace FlowMeet.Annuaire.API.Controllers
             }
             return BadRequest(result.Error);
         }
+        [HttpPost("AdminAssignGroupeToCollaborateur")]
+        public async Task<IActionResult> AdminAssignGroupeToCollaborateur([FromBody] AdminAssignGroupeToCollaborateurCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
+        [HttpPost("AdminRemoveGroupeFromCollaborateur")]
+        public async Task<IActionResult> AdminRemoveGroupeFromCollaborateur([FromBody] AdminRemoveGroupeFromCollaborateurCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
+        [HttpPost("AssignGroupeToCollaborateur/{entiteId}")]
+        public async Task<IActionResult> AssignGroupeToCollaborateur([FromRoute] string entiteId, [FromBody] AssignGroupeToCollaborateurCommand command)
+        {
+            command.EntiteId = entiteId;
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
+        [HttpPost("RemoveGroupeFromCollaborateur/{entiteId}")]
+        public async Task<IActionResult> RemoveGroupeFromCollaborateur([FromRoute] string entiteId, [FromBody] RemoveGroupeFromCollaborateurCommand command)
+        {
+            command.EntiteId = entiteId;
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest(result.Error);
+        }
     }
 }

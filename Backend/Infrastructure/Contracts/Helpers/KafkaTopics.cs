@@ -7,6 +7,8 @@
         RoleRemovedFromGroup,
         CollaborateurCreated,
         RoleAssignedToCollaborateur,
-        RoleRemovedFromCollaborateur
+        RoleRemovedFromCollaborateur,
+        GroupeAssignedToCollaborateur,
+        GroupeRemovedFromCollaborateur
     }
 }

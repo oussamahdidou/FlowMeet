@@ -5,29 +5,24 @@ using Microsoft.AspNetCore.Identity;
 
 namespace FlowMeet.AuthService.Consumers
 {
-    public class RoleRemovedFromCollaborateur : IMessageHandler<RoleRemovedFromCollaborateurEvent>
+    public class GroupeRemovedFromCollaborateurConsumer : IMessageHandler<GroupeRemovedFromCollaborateurEvent>
     {
         private readonly IServiceScopeFactory serviceScope;
-        public RoleRemovedFromCollaborateur(IServiceScopeFactory serviceScope)
+        public GroupeRemovedFromCollaborateurConsumer(IServiceScopeFactory serviceScope)
         {
             this.serviceScope = serviceScope;
         }
-        public async Task Handle(IMessageContext context, RoleRemovedFromCollaborateurEvent message)
+        public async Task Handle(IMessageContext context, GroupeRemovedFromCollaborateurEvent message)
         {
             using var scope = serviceScope.CreateScope();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             AppUser? appUser = await userManager.FindByIdAsync(message.CollaborateurId);
             if (appUser == null)
             {
                 throw new Exception($"Collaborateur with ID {message.CollaborateurId} not found.");
             }
-            IdentityRole? role = await roleManager.FindByIdAsync(message.RoleId);
-            if (role == null)
-            {
-                throw new Exception($"Role with ID {message.RoleId} not found.");
-            }
-            var result = await userManager.RemoveFromRoleAsync(appUser, role.Name);
+
+            var result = await userManager.RemoveClaimAsync(appUser, new System.Security.Claims.Claim("group", message.GroupeId));
             if (result != null)
             {
                 if (!result.Succeeded)

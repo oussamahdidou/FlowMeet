@@ -13,8 +13,11 @@ namespace FlowMeet.Annuaire.Infrastructure
         public IGroupeRepository Groupes { get; }
         public ICollaborateurRepository Collaborateurs { get; }
         public IRoleGroupeRepository GroupeRoles { get; }
-        public ICollaborateurRepository CollaborateurRoles { get; }
-        public UnitOfWork(FlowMeetAnnuaireDbContext dbcontext, ITypeEntiteRepository typeEntiteRepository, IEntiteRepository entites, IRoleRepository roles, IGroupeRepository groupes, IRoleGroupeRepository groupeRoles, ICollaborateurRepository collaborateurs, ICollaborateurRepository collaborateurRoles)
+        public IRoleCollaborateurRepository CollaborateurRoles { get; }
+        public ICollaborateurGroupeRepository CollaborateurGroupes { get; }
+
+
+        public UnitOfWork(FlowMeetAnnuaireDbContext dbcontext, ITypeEntiteRepository typeEntiteRepository, IEntiteRepository entites, IRoleRepository roles, IGroupeRepository groupes, IRoleGroupeRepository groupeRoles, ICollaborateurRepository collaborateurs, IRoleCollaborateurRepository collaborateurRoles, ICollaborateurGroupeRepository collaborateurGroupes)
         {
             this.dbcontext = dbcontext;
             TypeEntites = typeEntiteRepository;
@@ -24,6 +27,7 @@ namespace FlowMeet.Annuaire.Infrastructure
             GroupeRoles = groupeRoles;
             Collaborateurs = collaborateurs;
             CollaborateurRoles = collaborateurRoles;
+            CollaborateurGroupes = collaborateurGroupes;
         }
         public async Task SaveChanges()
         {

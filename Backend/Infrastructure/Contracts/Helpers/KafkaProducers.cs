@@ -7,6 +7,8 @@
         RoleRemovedFromGroupProducer,
         CollaborateurCreatedProducer,
         RoleAssignedToCollaborateurProducer,
-        RoleRemovedFromCollaborateurProducer
+        RoleRemovedFromCollaborateurProducer,
+        GroupeAssignedToCollaborateurProducer,
+        GroupeRemovedFromCollaborateurProducer
     }
 }

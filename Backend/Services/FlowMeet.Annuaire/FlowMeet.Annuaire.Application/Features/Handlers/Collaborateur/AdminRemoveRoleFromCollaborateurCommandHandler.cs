@@ -28,7 +28,7 @@ namespace FlowMeet.Annuaire.Application.Features.Handlers.Collaborateur
 
             await unitOfWork.CollaborateurRoles.DeleteAsync(roleCollaborateur);
             //publish event RoleRemovedFromCollaborateurEvent
-            await publisher.PublishAsync(new RoleRemovedFromCollaborateurEvent(request.RoleId, request.CollaborateurId));
+            await publisher.PublishAsync(new RoleRemovedFromCollaborateurEvent(request.CollaborateurId, request.RoleId));
             //commit transaction
             await unitOfWork.SaveChanges();
             return Result<Unit>.Success(Unit.Value);
